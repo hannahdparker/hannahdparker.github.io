@@ -1,3 +1,8 @@
+---
+layout: post
+title: "This is a test post for my R blog"
+---
+
 You're interested in doing some data analysis, that's clear.
 Unfortunately you're missing something important...... Data! There's
 plenty of sources of NBA data, and luckily for us, most of it's in a
