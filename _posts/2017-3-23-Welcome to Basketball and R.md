@@ -4,7 +4,7 @@ title: "Welcome to Basketball and R"
 date: 2017-3-23 00:10:00
 ---
 
-![_config.yml]({{ site.baseurl }}/images/pg.jpg)
+<img src="images/pg.jpg" width="200">
 
 
 Welcome to Basketball and R! This site focuses on data analysis and
