@@ -2,12 +2,15 @@
 layout: post
 title: "Scraping Data"
 date: 2017-3-23 00:30:00
+excerpt_separator: <!--more-->
 ---
 
 You're interested in doing some data analysis, that's clear.
 Unfortunately you're missing something important...... Data! There's
 plenty of sources of NBA data, and luckily for us, most of it's in a
 very structured format.
+
+<!--more-->
 
 In this post, I'm going to show you how to get different types of data
 from a couple of different sources. The focus is going to be on scraping
