@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Scraping Data"
-date: 2017-3-23
+date: 2017-3-23 00:30:00
 ---
 
 You're interested in doing some data analysis, that's clear.
