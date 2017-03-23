@@ -16,7 +16,7 @@ straightforward, when trying to collect large amounts of data this
 method can be very cumbersome.
 
 Scraping a Basic HTML Table
-===========================
+----------------------------
 
 The first example we're going to go over is scraping standings from USA
 Today. The standings are in a basic HTML format. We'll be using the
