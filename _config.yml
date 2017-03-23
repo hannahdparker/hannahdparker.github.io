@@ -2,12 +2,6 @@
 # This file contains configuration flags to customize your site
 #
 
-markdown: redcarpet
-redcarpet:
-    extension:
-        - fenced_code_blocks
-highlighter: pygments
-
 # Name of your site (displayed in the header)
 name: Basketball and R
 
