@@ -98,8 +98,8 @@ ready for analysis!
       mutate_each(funs(as.numeric), c(GB, Home_Wins:L.10_Loss)) %>%
       select(-c(HOME:CONF, L.10))
 
-HTML Scraping Continued
-=======================
+### HTML Scraping Continued ###
+
 
 Next, I want to go over an example that's a bit more difficult. The
 focus on this section is more about dealing with a certain website
@@ -184,8 +184,8 @@ see we were successful!
     ## 2  2.1  0.8 13.2 28.5 NA 2.3 2.6 4.9 0.105 NA  2.1 -0.3 1.8  2.1
     ## 3  1.5  5.9  9.5 20.1 NA 3.5 3.1 6.6 0.149 NA -0.4  2.5 2.1  2.2
 
-Scraping JSON Data
-==================
+### Scraping JSON Data ###
+
 
 Another great source for NBA data is the NBA's own stats website.
 Getting data from the NBA site is a little different as it's stored in a
@@ -285,8 +285,8 @@ These few examples should be a good way to get your guys' hands on some
 data. Although these examples are related to a few NBA specific
 websites, they can easily be applied to websites with other information.
 
-References and Other Tutorials
-==============================
+### References and Other Tutorials ###
+
 
 -   <http://www.gregreda.com/2015/02/15/web-scraping-finding-the-api/>:
     Greg Reda does a great job of explaining scraping json data
