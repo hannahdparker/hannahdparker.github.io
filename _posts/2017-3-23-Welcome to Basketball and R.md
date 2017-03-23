@@ -3,6 +3,8 @@ layout: post
 title: "Welcome to Basketball and R"
 ---
 
+![_config.yml]({{ site.baseurl }}/images/pg.png)
+
 
 Welcome to Basketball and R! This site focuses on data analysis and
 statistical procedures using basketball data. All the projects and
