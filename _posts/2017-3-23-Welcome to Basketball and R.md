@@ -4,7 +4,7 @@ title: "Welcome to Basketball and R"
 date: 2017-3-23 00:10:00
 ---
 
-<img src="/images/pg.jpg" width="300" height="200">
+<img src="/images/pg.jpg" width="650" height="400">
 
 
 Welcome to Basketball and R! This site focuses on data analysis and
