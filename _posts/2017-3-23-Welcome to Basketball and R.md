@@ -2,13 +2,14 @@
 layout: post
 title: "Welcome to Basketball and R"
 date: 2017-3-23 00:10:00
+excerpt_separator: <!--more-->
 ---
 
 <img src="/images/pg.jpg" width="650" height="400">
 
 
 Welcome to Basketball and R! This site focuses on data analysis and
-statistical procedures using basketball data. All the projects and
+statistical procedures using basketball data. <!--more--> All the projects and
 tutorials on this blog will be using the R programming language, but the
 ideas behind many of the posts can be re-implemented with whatever you
 feel comfortable with.
