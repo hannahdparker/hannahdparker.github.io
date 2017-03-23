@@ -5,7 +5,7 @@ date: 2017-3-23 00:10:00
 excerpt_separator: <!--more-->
 ---
 
-<img src="/images/pg.jpg" width="650" height="400">
+<center><img src="/images/pg.jpg" width="650" height="400"></center>
 
 
 Welcome to Basketball and R! This site focuses on data analysis and
