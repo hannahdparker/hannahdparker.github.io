@@ -7,7 +7,7 @@ excerpt_separator: <!--more-->
 
 
 
-<center><img src="/images/pg.jpg" width="650" height="400"></center>
+<br><center><img src="/images/pg.jpg" width="650" height="400"></center><br>
 
 
 Welcome to Basketball and R! This site focuses on data analysis and
