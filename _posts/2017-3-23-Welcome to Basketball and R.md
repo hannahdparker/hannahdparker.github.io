@@ -1,7 +1,6 @@
 ---
 layout: post
 title: "Welcome to Basketball and R"
-date: 3/23/2017
 ---
 
 
