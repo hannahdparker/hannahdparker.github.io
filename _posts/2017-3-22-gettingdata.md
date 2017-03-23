@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "This is a test post for my R blog"
+title: "Scraping Data"
 ---
 
 You're interested in doing some data analysis, that's clear.
