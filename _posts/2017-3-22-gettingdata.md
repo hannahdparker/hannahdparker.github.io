@@ -15,7 +15,7 @@ into a spreadsheet or downloading it in csv form. While this method is
 straightforward, when trying to collect large amounts of data this
 method can be very cumbersome.
 
-###Scraping a Basic HTML Table
+###Scraping a Basic HTML Table###
 
 
 The first example we're going to go over is scraping standings from USA
