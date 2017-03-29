@@ -54,9 +54,9 @@ parses the table into a data frame.
 
 ```R
 u.standings<- 
-      usa %>%
-      read_html('#DataTables_Table_0') %>%
-      html_table()
+  usa %>%
+  read_html('#DataTables_Table_0') %>%
+  html_table()
 ```
 
 The data is stored in a list, split by the separate conferences. Let's
