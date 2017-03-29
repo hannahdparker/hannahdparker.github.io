@@ -27,13 +27,17 @@ Today. The standings are in a basic HTML format. We'll be using the
 dplyr and rvest libraries throughout this post, so let's load them up
 now.
 
-    library(dplyr)
-    library(rvest)
+```r
+library(dplyr)
+library(rvest)
+```
 
 Now we'll store the url we are going to be scraping from in an object
 called "usa".
 
+```R
     usa<- "http://www.usatoday.com/sports/nba/standings/"
+```
 
 Now it's time to scrape some data. What you'll need is the CSS selector.
 The method for getting this can be different based on what browser you
@@ -48,15 +52,17 @@ the css selector in the command read\_html(). Because the data we are
 scraping is in table format, we use the command html\_table(), which
 parses the table into a data frame.
 
-    u.standings<-
+```R
+u.standings<- 
       usa %>%
       read_html('#DataTables_Table_0') %>%
       html_table()
+```
 
 The data is stored in a list, split by the separate conferences. Let's
 change the list into two data frames, one for the east and one for the
 west.
-
+```R
     east<- data.frame(u.standings[1])
     west<- data.frame(u.standings[2])
 
@@ -70,16 +76,16 @@ west.
     ## 1  282  5-5    1
     ## 2  175  6-4    1
     ## 3  137  6-4    2
-
+```
 Unfortunately there is a pretty big issue with the data; any column with
 a hyphen is treated as a character column. To deal with this in the
 Games Back column (GB), we'll simply replace the hyphen with a zero,
 since they mean the same thing (a team in first place is zero games back
 of first place).
-
+```R
     east[east=="-"]<- "0"
     west[west=="-"]<- "0"
-
+```
 Dealing with the home, road, conference and last 10 game records is a
 little more difficult. Let's split up these records into separate win
 and loss columns (i.e. home wins and home losses). The following dplyr
@@ -93,6 +99,7 @@ Home\_Wins for example, we're grabbing the characters starting at the
 first element and ending at the second element. The dataframe is now
 ready for analysis!
 
+```R
     east<-
       east %>%
       mutate(Home_Wins = substring(HOME, 1, 2), Away_Wins = substring(ROAD, 1, 2), 
@@ -101,6 +108,7 @@ ready for analysis!
              Conf_Loss = substring(CONF, 5, 7), L.10_Loss = substring(L.10, 3, 3)) %>%
       mutate_each(funs(as.numeric), c(GB, Home_Wins:L.10_Loss)) %>%
       select(-c(HOME:CONF, L.10))
+```
 
 ### HTML Scraping Continued ###
 
@@ -128,18 +136,18 @@ scrape is found here:
 to start by creating a list of urls for each of the three seasons. We're
 going to use sapply to paste each respective season into the Indiana
 Pacers' team url and store it in an object called urls.
-
+```R
     urls<- sapply(as.character(2015:2017), 
                   function(x) 
                     paste("http://www.basketball-reference.com/teams/IND/", x, ".html", sep=""))
-
+```
 Now we're going to scrape the tables. We're going to apply a scraping
 function to each of the urls and store them in a list called adv.pacers.
 We use the same method explained in the last section of identifying the
 css selector, in this case it's \#advanced. Before we scrape the data,
 we have to parse the comments, but once the comments are parsed, the
 tables are easily scraped.
-
+```R
     adv.pacers<-
       lapply(urls, 
              function(x)
@@ -152,10 +160,10 @@ tables are easily scraped.
                read_html() %>%
                html_node('#advanced') %>%
                html_table())
-
+```
 Looking at the first three rows of each data frame in the list, we can
 see we were successful!
-
+```R
     lapply(adv.pacers, function(x) head(x, 3))
 
     ## $`2015`
@@ -187,7 +195,7 @@ see we were successful!
     ## 1  2.0  1.2 17.4 22.3 NA 4.2 2.3 6.5 0.138 NA  2.0 -0.1 2.0  2.3
     ## 2  2.1  0.8 13.2 28.5 NA 2.3 2.6 4.9 0.105 NA  2.1 -0.3 1.8  2.1
     ## 3  1.5  5.9  9.5 20.1 NA 3.5 3.1 6.6 0.149 NA -0.4  2.5 2.1  2.2
-
+```
 ### Scraping JSON Data ###
 
 
@@ -198,9 +206,9 @@ getting data is just as easy!
 
 There are multiple R libraries for scraping JSON data, but the one I'm
 most familiar with is jsonlite.
-
+```R
     library(jsonlite)
-
+```
 We're going to scrape the traditional stats table for Kyle Korver found
 at this link: <http://stats.nba.com/player/#!/201935/>. I am using
 firefox again in this instance, but chrome has a similar method of doing
@@ -220,14 +228,14 @@ this sounds right.
 Let's try bringing the data into R. First, we'll use the fromJSON
 command on the url we got from the NBA stats website. the readLines
 command reads in the url and returns the source data from the web page.
-
+```R
     korver<- fromJSON(readLines("http://stats.nba.com/stats/playerdashboardbyyearoveryear?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=2594&PlusMinus=N&Rank=N&Season=2016-17&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&Split=yoy&VsConference=&VsDivision="))
-
+```
 The data is now in a list called korver. To get the data we want we need
 to check out the result sets. The row set has all of the actual data we
 want. Pulling that up gives us this (note, I'm only pulling up the first
 three rows of columns 11 to 15, just to make things less messy):
-
+```R
     korver.df<- data.frame(korver$resultSets$rowSet)
     head(korver.df[,11:15], 3)
 
@@ -235,14 +243,14 @@ three rows of columns 11 to 15, just to make things less messy):
     ## 1 3.6 7.9 0.463 2.4 5.4
     ## 2   4 8.1 0.488 2.8 5.8
     ## 3 3.4 7.7 0.441   2   5
-
+```
 That's a lot of information, and it doesn't have column names... It
 looks really confusing. Luckily, the column names are in the data we
 scraped, just under the headers section in resultSets. There are a list
 of two headers, both of which are the same; this is because the scraped
 dataframe has the same columns listed twice. Let's officially assign
 these to be the column names of korver.df.
-
+```R
     korver$resultSets$headers[[1]]
 
     ##  [1] "GROUP_SET"         "GROUP_VALUE"       "TEAM_ID"          
@@ -268,7 +276,7 @@ these to be the column names of korver.df.
     ## [61] "TD3_RANK"          "CFID"              "CFPARAMS"
 
     colnames(korver.df)<- korver$resultSets$headers[[1]]
-
+```
 Now our data looks a little more understandable... The scraped data
 includes a lot of columns that aren't shown on the original website
 table, such as MAX\_GAME\_DATE, Wins, and the rank of each season's
@@ -277,14 +285,14 @@ deem unimportant, and if you end up changing your mind on stuff you got
 rid of, you can just scrape it again! Also be aware, the scraped data is
 read in as a factor, so you need to change up stuff that you don't want
 to be considered a factor.
-
+```R
     head(korver.df[,11:15], 3)
 
     ##   FGM FGA FG_PCT FG3M FG3A
     ## 1 3.6 7.9  0.463  2.4  5.4
     ## 2   4 8.1  0.488  2.8  5.8
     ## 3 3.4 7.7  0.441    2    5
-
+```
 These few examples should be a good way to get your guys' hands on some
 data. Although these examples are related to a few NBA specific
 websites, they can easily be applied to websites with other information.
