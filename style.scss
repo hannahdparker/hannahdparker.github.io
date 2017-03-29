@@ -20,7 +20,7 @@ html {
 body {
 	background: $white;
   font: 18px/1.4 $helvetica;
-  color: $blue;
+  color: $black;
 }
 
 .container {
@@ -123,11 +123,11 @@ img {
 // Specify the color of the selection
 ::-moz-selection {
   color: $black;
-  background: $lightGray;
+  background: $white;
 }
 ::selection {
   color: $black;
-  background: $lightGray;
+  background: $white;
 }
 
 // Nicolas Gallagher's micro clearfix hack
