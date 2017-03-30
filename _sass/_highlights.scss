@@ -15,14 +15,14 @@ code {
   font-size: 16px;
 }
 
-.highlight  { background: #ffffff; }
-.highlight .c { color: #999988; font-style: italic } /* Comment */
-
+.highlight .c { color: $blue } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */
+.highlight .g { color: #93A1A1 } /* Generic */
+.highlight .k { color: #859900 } /* Keyword */
+.highlight .l { color: #93A1A1 } /* Literal */
+.highlight .n { color: #93A1A1 } /* Name */
+.highlight .o { color: #859900 } /* Operator */
 
-.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
-.highlight .k { font-weight: bold } /* Keyword */
-.highlight .o { font-weight: bold } /* Operator */
 .highlight .x { color: #CB4B16 } /* Other */
 
 .highlight .p { color: #93A1A1 } /* Punctuation */
