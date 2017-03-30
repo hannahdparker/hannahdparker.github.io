@@ -17,7 +17,7 @@ code {
 
 .highlight .c { color: $blue } /* Comment */
 .highlight .err { color: #93A1A1 } /* Error */
-.highlight .g { color: #93A1A1 } /* Generic */
+.highlight .g { color: $black } /* Generic */
 .highlight .k { color: #859900 } /* Keyword */
 .highlight .l { color: #93A1A1 } /* Literal */
 .highlight .n { color: #93A1A1 } /* Name */
@@ -29,7 +29,7 @@ code {
 .highlight .c1 { color: #586E75 } /* Comment.Single */
 .highlight .cs { color: #859900 } /* Comment.Special */
 .highlight .gd { color: #2AA198 } /* Generic.Deleted */
-.highlight .ge { color: #93A1A1; font-style: italic } /* Generic.Emph */
+.highlight .ge { color: $black; font-style: italic } /* Generic.Emph */
 .highlight .gr { color: #DC322F } /* Generic.Error */
 .highlight .gh { color: #CB4B16 } /* Generic.Heading */
 .highlight .gi { color: #859900 } /* Generic.Inserted */
