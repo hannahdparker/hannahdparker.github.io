@@ -4,7 +4,7 @@ title: About
 permalink: /about/
 ---
 
-My name is Jake Campbell. I'm currently a data modeling analyst at NYU. My background is in analytics and applied statistics. Basketball has always been my favorite sport and has been a great backdrop for me to help learn and better understand statistics. I hope the tutorials on the site can help you the same way they've helped me!
+Hey guys, thanks for checking out the site. My name is Jake. I'm a quantitative analyst in New York City who has had a love for basketball for years. I grew up in Indiana and am a die hard Pacers fan, so expect to see plenty of Pacer examples in my posts. Feel free to contact me with any questions or sage advice; I'm all ears!
 
 ### Contact me
 
