@@ -232,11 +232,11 @@ command on the url we got from the NBA stats website. the readLines
 command reads in the url and returns the source data from the web page.
 ```R
 korver<- fromJSON(readLines("http://stats.nba.com/stats/playerdashboardby
-         yearoveryear?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&
-         Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&
-         PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=2594&PlusMinus=N&Rank=N&
-         Season=2016-17&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=
-         &Split=yoy&VsConference=&VsDivision="))
+yearoveryear?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&
+Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&
+PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=2594&PlusMinus=N&Rank=N&
+Season=2016-17&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=
+&Split=yoy&VsConference=&VsDivision="))
 ```
 The data is now in a list called korver. To get the data we want we need
 to check out the result sets. The row set has all of the actual data we
