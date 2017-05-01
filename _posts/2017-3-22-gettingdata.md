@@ -105,7 +105,8 @@ east<-
   mutate(Home_Wins = substring(HOME, 1, 2), Away_Wins = substring(ROAD, 1, 2), 
          Conf_Wins = substring(CONF, 1, 2), L.10_Wins = substring(L.10, 1, 1), 
          Home_Loss = substring(HOME, 5, 7), Away_Loss = substring(ROAD, 5, 7), 
-         Conf_Loss = substring(CONF, 5, 7), L.10_Loss = substring(L.10, 3, 3)) %>%
+         Conf_Loss = substring(CONF, 5, 7), L.10_Loss = substring(L.10, 3, 3)) 
+         %>%
   mutate_each(funs(as.numeric), c(GB, Home_Wins:L.10_Loss)) %>%
   select(-c(HOME:CONF, L.10))
 ```
@@ -139,7 +140,8 @@ Pacers' team url and store it in an object called urls.
 ```R
 urls<- sapply(as.character(2015:2017), 
              function(x) 
-                paste("http://www.basketball-reference.com/teams/IND/", x, ".html", sep=""))
+                paste("http://www.basketball-reference.com/teams/IND/", 
+                x, ".html", sep=""))
 ```
 Now we're going to scrape the tables. We're going to apply a scraping
 function to each of the urls and store them in a list called adv.pacers.
@@ -229,7 +231,12 @@ Let's try bringing the data into R. First, we'll use the fromJSON
 command on the url we got from the NBA stats website. the readLines
 command reads in the url and returns the source data from the web page.
 ```R
-korver<- fromJSON(readLines("http://stats.nba.com/stats/playerdashboardbyyearoveryear?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=2594&PlusMinus=N&Rank=N&Season=2016-17&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=&Split=yoy&VsConference=&VsDivision="))
+korver<- fromJSON(readLines("http://stats.nba.com/stats/playerdashboardby
+yearoveryear?DateFrom=&DateTo=&GameSegment=&LastNGames=0&LeagueID=00&
+Location=&MeasureType=Base&Month=0&OpponentTeamID=0&Outcome=&PORound=0&
+PaceAdjust=N&PerMode=PerGame&Period=0&PlayerID=2594&PlusMinus=N&Rank=N&
+Season=2016-17&SeasonSegment=&SeasonType=Regular+Season&ShotClockRange=
+&Split=yoy&VsConference=&VsDivision="))
 ```
 The data is now in a list called korver. To get the data we want we need
 to check out the result sets. The row set has all of the actual data we
