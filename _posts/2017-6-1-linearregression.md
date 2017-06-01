@@ -55,7 +55,8 @@ standings<-
   #the following code simply combines the two under one column name (Team)
   #we also make a new column that shows the difference in average points for 
   ##and against
-  mutate(Team = ifelse(is.na(`Eastern Conference`)==T, `Western Conference`, `Eastern Conference`),
+  mutate(Team = ifelse(is.na(`Eastern Conference`)==T, `Western Conference`, 
+                       `Eastern Conference`),
          `PDiff/G` = `PS/G` - `PA/G`) %>%
   #we select the columns we want
   select(Team, W, L, `PS/G`, `PA/G`, `PDiff/G`)
