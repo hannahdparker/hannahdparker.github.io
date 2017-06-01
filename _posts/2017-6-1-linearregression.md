@@ -1,7 +1,16 @@
+---
+layout: post
+title: "Linear Regression Pt. 1: Simple Linear Regression"
+date: 2017-6-01 00:00:00
+excerpt_separator: <!--more-->
+---
+
 Today, I wanted to go over the basics of linear regression. Linear
 regression is a statistical method that has many uses: finding how
 important variables are, identifying how much response variance can be
 explained by predictors, and even making predictions for variables.
+
+<!--more-->
 
 Before I get started, you might notice a lot of similarities between
 this tutorial and previous tutorials, specifically the ANOVA lesson.
