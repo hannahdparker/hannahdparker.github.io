@@ -24,8 +24,7 @@ regression's goal is fitting a regression line between the predictor and
 response variable. From this line, we can see differences between
 observations and the regression line as well as make predictions.
 
-The Data
-========
+### The Data ###
 
 The data we are going to use is found in the 2015-2016 standings on
 Basketball Reference
@@ -34,28 +33,30 @@ We'll be scraping this using the following code and storing the data in
 a dataframe called `standings`. I added notes to explain what each line
 does.
 
-    library(rvest)
-    library(dplyr)
+```r
+library(rvest)
+library(dplyr)
 
-    standings<-
-      #first specify the url
-      "http://www.basketball-reference.com/leagues/NBA_2016_standings.html" %>%
-      #input the css selector (look back at the lesson on scraping data for more info on where this is)
-      read_html('#confs_standings_E') %>%
-      #store results in a table
-      html_table() %>%
-      #results are in a list with many elements; we want the first two
-      #the dot represents the list from which we index the first two elements
-      .[1:2] %>%
-      #we bind the two elements into one table
-      do.call(bind_rows, .) %>%
-      #the team names are listed under two different columns separated by conference
-      #the following code simply combines the two under one column name (Team)
-      #we also make a new column that shows the difference in average points for and against
-      mutate(Team = ifelse(is.na(`Eastern Conference`)==T, `Western Conference`, `Eastern Conference`),
-             `PDiff/G` = `PS/G` - `PA/G`) %>%
-      #we select the columns we want
-      select(Team, W, L, `PS/G`, `PA/G`, `PDiff/G`)
+standings<-
+  #first specify the url
+  "http://www.basketball-reference.com/leagues/NBA_2016_standings.html" %>%
+  #input the css selector (look back at the lesson on scraping data for more info on where this is)
+  read_html('#confs_standings_E') %>%
+  #store results in a table
+  html_table() %>%
+  #results are in a list with many elements; we want the first two
+  #the dot represents the list from which we index the first two elements
+  .[1:2] %>%
+  #we bind the two elements into one table
+  do.call(bind_rows, .) %>%
+  #the team names are listed under two different columns separated by conference
+  #the following code simply combines the two under one column name (Team)
+  #we also make a new column that shows the difference in average points for and against
+  mutate(Team = ifelse(is.na(`Eastern Conference`)==T, `Western Conference`, `Eastern Conference`),
+         `PDiff/G` = `PS/G` - `PA/G`) %>%
+  #we select the columns we want
+  select(Team, W, L, `PS/G`, `PA/G`, `PDiff/G`)
+ ```
 
 This procedure is a little complicated as Basketball Reference separates
 standings by conference. I ended up scraping all of the standings and
@@ -130,8 +131,7 @@ something like this (only the first couple of results are shown):
 </tbody>
 </table>
 
-Initial Analysis
-================
+### Initial Analysis ###
 
 For our initial analysis, we are going to look at the effect of
 `PDiff/G` on wins. `PDiff/G` is a column we created in the scraping code
@@ -141,42 +141,41 @@ higher value for this difference would result in more wins.
 
 Let's start by plotting the relationship between the two using a
 `ggplot2` scatterplot.
+```r
+library(ggplot2)
 
-    library(ggplot2)
-
-    standings %>%
-      ggplot(aes(`PDiff/G`, W)) +
-      geom_point(pch=21, size=3, fill="white") +
-      geom_smooth(method="lm", se = F) +
-      labs(x="Point Differential Per Game", y="Wins")
-
+standings %>%
+  ggplot(aes(`PDiff/G`, W)) +
+  geom_point(pch=21, size=3, fill="white") +
+  geom_smooth(method="lm", se = F) +
+  labs(x="Point Differential Per Game", y="Wins")
+```
 ![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
 The regression line is represented by the blue line on the graph.
 Overall, the relationship looks strongly linear as most points do not
 stray very far from this line.
 
-Simple Linear Regression
-========================
+### Simple Linear Regression ###
 
 Simple linear regression involves a dependent variable and one
 independent variable. In this example, wins is our dependent and point
 differential is our independent. The command to run a linear regression
 in R is `lm`. We use the same formula interface we did in previous
 lessons (`y ~ x`).
+```r
+set.seed(1234)
+standings.lm<- lm(W ~ `PDiff/G`, data=standings)
+standings.lm
 
-    set.seed(1234)
-    standings.lm<- lm(W ~ `PDiff/G`, data=standings)
-    standings.lm
-
-    ## 
-    ## Call:
-    ## lm(formula = W ~ `PDiff/G`, data = standings)
-    ## 
-    ## Coefficients:
-    ## (Intercept)    `PDiff/G`  
-    ##      41.018        2.639
-
+## 
+## Call:
+## lm(formula = W ~ `PDiff/G`, data = standings)
+## 
+## Coefficients:
+## (Intercept)    `PDiff/G`  
+##      41.018        2.639
+```
 Calling the `lm` object returns the coefficients for the regression
 formula. This formula would take on the form of
 `y = intercept + x*coef(x)`. In this scenario, that would mean
@@ -186,42 +185,42 @@ differential of 1, we would predict that a team had
 line starts at the x-axis. So if a team had a 0 point differential, we
 would predict 41.018 wins. We can make predictions of wins based on the
 team's average point differential using the `predict` function.
+```r
+predict(standings.lm)
 
-    predict(standings.lm)
-
-    ##        1        2        3        4        5        6        7        8 
-    ## 56.85381 52.89476 45.24059 50.51933 49.46358 48.14389 45.50452 42.60122 
-    ##        9       10       11       12       13       14       15       16 
-    ## 37.05854 39.69791 36.79460 29.93224 33.89130 21.48626 14.09602 69.52279 
-    ##       17       18       19       20       21       22       23       24 
-    ## 68.99491 60.28499 52.36689 43.12909 40.22578 35.21098 41.28153 45.76846 
-    ##       25       26       27       28       29       30 
-    ## 34.41917 32.83555 30.98799 31.51586 23.59776 15.67965
-
+##        1        2        3        4        5        6        7        8 
+## 56.85381 52.89476 45.24059 50.51933 49.46358 48.14389 45.50452 42.60122 
+##        9       10       11       12       13       14       15       16 
+## 37.05854 39.69791 36.79460 29.93224 33.89130 21.48626 14.09602 69.52279 
+##       17       18       19       20       21       22       23       24 
+## 68.99491 60.28499 52.36689 43.12909 40.22578 35.21098 41.28153 45.76846 
+##       25       26       27       28       29       30 
+## 34.41917 32.83555 30.98799 31.51586 23.59776 15.67965
+```
 The `lm` object has a lot of stuff in it, and using the `summary`
 command allows us to see most of that stuff.
+```r
+summary(standings.lm)
 
-    summary(standings.lm)
-
-    ## 
-    ## Call:
-    ## lm(formula = W ~ `PDiff/G`, data = standings)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -5.7685 -1.7118 -0.2127  1.3792  6.7890 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  41.0176     0.5193   78.98   <2e-16 ***
-    ## `PDiff/G`     2.6394     0.1025   25.75   <2e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 2.844 on 28 degrees of freedom
-    ## Multiple R-squared:  0.9595, Adjusted R-squared:  0.958 
-    ## F-statistic: 662.9 on 1 and 28 DF,  p-value: < 2.2e-16
-
+## 
+## Call:
+## lm(formula = W ~ `PDiff/G`, data = standings)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.7685 -1.7118 -0.2127  1.3792  6.7890 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  41.0176     0.5193   78.98   <2e-16 ***
+## `PDiff/G`     2.6394     0.1025   25.75   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.844 on 28 degrees of freedom
+## Multiple R-squared:  0.9595, Adjusted R-squared:  0.958 
+## F-statistic: 662.9 on 1 and 28 DF,  p-value: < 2.2e-16
+```
 The first thing we see is the distribution of residuals. This is the
 difference between the actual response variable and the predicted value.
 We also see our coefficients for each variable. It does appear that the
@@ -246,9 +245,9 @@ The first one is the normality assumption seen in previous tutorials.
 Rather than checking normality of each variable or each group in a
 categorical variable like we did in previous tutorials, we can more
 easily check the normality of residuals. Let's look at the qq plot.
-
-    plot(standings.lm, which = 2)
-
+```r
+plot(standings.lm, which = 2)
+```
 ![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-7-1.png)
 
 Plotting the `lm` object directly produces several diagnostic plots.
@@ -259,9 +258,9 @@ normal.
 Next we can check the assumption of constant variance between residuals
 and the predicted value. To do this, we plot the predicted values
 against the residuals and see the spread, like so:
-
-    plot(standings.lm, which = 1)
-
+```r
+plot(standings.lm, which = 1)
+```
 ![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 We don't want to see any sort of trend in this graph. The red line shows
@@ -285,8 +284,7 @@ Another issue I'll go into detail in a later lesson is outliers, which
 are extreme points that don't always fit the model and could possibly
 negatively influence it.
 
-To Be Continued
-===============
+### To Be Continued ###
 
 With simple linear regression under our belt, we can now make basic
 predictive models. In the next tutorial, I'll go over multiple linear
