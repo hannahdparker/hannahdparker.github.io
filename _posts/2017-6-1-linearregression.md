@@ -154,7 +154,7 @@ standings %>%
   geom_smooth(method="lm", se = F) +
   labs(x="Point Differential Per Game", y="Wins")
 ```
-![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+<center><img src="/images/initial.PNG"></center>
 
 The regression line is represented by the blue line on the graph.
 Overall, the relationship looks strongly linear as most points do not
@@ -252,7 +252,7 @@ easily check the normality of residuals. Let's look at the qq plot.
 ```r
 plot(standings.lm, which = 2)
 ```
-![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+<center><img src="/images/normality.PNG"></center>
 
 Plotting the `lm` object directly produces several diagnostic plots.
 Here we plot the 2nd plot, the qq plot. A couple of teams break from the
@@ -265,7 +265,7 @@ against the residuals and see the spread, like so:
 ```r
 plot(standings.lm, which = 1)
 ```
-![](linearregressionmd_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+<center><img src="/images/convar.PNG"></center>
 
 We don't want to see any sort of trend in this graph. The red line shows
 the smoothness of the points; for the assumption to hold, it should
