@@ -40,7 +40,8 @@ library(dplyr)
 standings<-
   #first specify the url
   "http://www.basketball-reference.com/leagues/NBA_2016_standings.html" %>%
-  #input the css selector (look back at the lesson on scraping data for more info on where this is)
+  #input the css selector 
+  #(look back at the lesson on scraping data for more info on where this is)
   read_html('#confs_standings_E') %>%
   #store results in a table
   html_table() %>%
@@ -49,9 +50,11 @@ standings<-
   .[1:2] %>%
   #we bind the two elements into one table
   do.call(bind_rows, .) %>%
-  #the team names are listed under two different columns separated by conference
+  #the team names are listed under two different columns separated by 
+  ##conference
   #the following code simply combines the two under one column name (Team)
-  #we also make a new column that shows the difference in average points for and against
+  #we also make a new column that shows the difference in average points for 
+  ##and against
   mutate(Team = ifelse(is.na(`Eastern Conference`)==T, `Western Conference`, `Eastern Conference`),
          `PDiff/G` = `PS/G` - `PA/G`) %>%
   #we select the columns we want
