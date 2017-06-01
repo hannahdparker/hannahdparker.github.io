@@ -71,70 +71,15 @@ could be column names with blank spaces, punctuation, or in our case,
 slashes. The `make.names` command will fix this, but for simplicity and
 quickness, I did not include it. The resulting data frame should look
 something like this (only the first couple of results are shown):
-
-<table>
-<thead>
-<tr class="header">
-<th align="left">Team</th>
-<th align="right">W</th>
-<th align="right">L</th>
-<th align="right">PS/G</th>
-<th align="right">PA/G</th>
-<th align="right">PDiff/G</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Cleveland Cavaliers* (1)</td>
-<td align="right">57</td>
-<td align="right">25</td>
-<td align="right">104.3</td>
-<td align="right">98.3</td>
-<td align="right">6.0</td>
-</tr>
-<tr class="even">
-<td align="left">Toronto Raptors* (2)</td>
-<td align="right">56</td>
-<td align="right">26</td>
-<td align="right">102.7</td>
-<td align="right">98.2</td>
-<td align="right">4.5</td>
-</tr>
-<tr class="odd">
-<td align="left">Miami Heat* (3)</td>
-<td align="right">48</td>
-<td align="right">34</td>
-<td align="right">100.0</td>
-<td align="right">98.4</td>
-<td align="right">1.6</td>
-</tr>
-<tr class="even">
-<td align="left">Atlanta Hawks* (4)</td>
-<td align="right">48</td>
-<td align="right">34</td>
-<td align="right">102.8</td>
-<td align="right">99.2</td>
-<td align="right">3.6</td>
-</tr>
-<tr class="odd">
-<td align="left">Boston Celtics* (5)</td>
-<td align="right">48</td>
-<td align="right">34</td>
-<td align="right">105.7</td>
-<td align="right">102.5</td>
-<td align="right">3.2</td>
-</tr>
-<tr class="even">
-<td align="left">Charlotte Hornets* (6)</td>
-<td align="right">48</td>
-<td align="right">34</td>
-<td align="right">103.4</td>
-<td align="right">100.7</td>
-<td align="right">2.7</td>
-</tr>
-</tbody>
-</table>
-
+```r
+  ##                        Team  W  L  PS/G  PA/G PDiff/G
+  ## 1 Cleveland Cavaliers* (1)  57 25 104.3  98.3     6.0
+  ## 2     Toronto Raptors* (2)  56 26 102.7  98.2     4.5
+  ## 3          Miami Heat* (3)  48 34 100.0  98.4     1.6
+  ## 4       Atlanta Hawks* (4)  48 34 102.8  99.2     3.6
+  ## 5      Boston Celtics* (5)  48 34 105.7 102.5     3.2
+  ## 6   Charlotte Hornets* (6)  48 34 103.4 100.7     2.7
+```
 ### Initial Analysis ###
 
 For our initial analysis, we are going to look at the effect of
