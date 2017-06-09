@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Linear Regression Pt. 2: Multiple Linear Regression"
+date: 2017-6-09 00:00:00
+excerpt_separator: <!--more-->
+---
+
 In the last tutorial, we went over simple linear regression with a
 continuous (numeric) predictor. We can expand on this idea by going over
 regression with categorical variables as well as regression with more
@@ -5,8 +12,9 @@ than one variable. We're going to be expanding on the same dataset we
 used in the last tutorial, so go back to that one if you want to go over
 how to scrape that again.
 
-Simple Linear Regression with a Categorical Predictor
-=====================================================
+<!--more-->
+
+### Simple Linear Regression with a Categorical Predictor ###
 
 In the last tutorial, we saw how a numeric variable was used to predict
 the dependent variable in simple linear regression. Predicting the
@@ -131,8 +139,7 @@ can then assume that conference is not significant in predicting wins.
 The same assumptions from the last tutorial apply, but I'm not going to
 go through them in this scenario.
 
-Multiple Linear Regression
-==========================
+### Multiple Linear Regression ### 
 
 When we want to include more than one predictor in our model, we move
 from simple regression to multiple regression. We're going to use a
