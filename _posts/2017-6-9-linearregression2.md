@@ -154,7 +154,7 @@ scatterplot matrix using the `pairs` command.
 ```r
 pairs(standings[,c(2,4,5)], upper.panel = panel.smooth)
 ```
-![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+<center><img src="/images/scattermatrix.PNG"></center>
 
 Here I indexed the three columns we'll be looking at. I also specified
 that I want a smooth line in the upper panel. It looks like both average
@@ -210,7 +210,7 @@ we'll check for normality of residuals using a qq plot.
 ```r
 plot(standings.mult, which = 2)
 ```
-![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+<center><img src="/images/qqmult.PNG"></center>
 
 It does appear that a few points stray a little bit from the qqline.
 None of the points stray too far, however, so I think we can put most of
@@ -223,7 +223,7 @@ help us check for constant variance and linearity.
 ```r
 plot(standings.mult, which=1)
 ```
-![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+<center><img src="/images/rfmult.PNG"></center>
 
 Since the residuals mainly stick around 0 we can assume linearity. The
 smooth line also sticks around 0 and the residuals show no obvious
