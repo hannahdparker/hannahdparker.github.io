@@ -31,7 +31,8 @@ library(dplyr)
 standings<-
   standings %>%
   #the dataframe is ordered first 15 in the east, second 15 in the west
-  #we can simply repeat east 15 times followed by west 15 times to create the Conference column
+  #we can simply repeat east 15 times followed by west 15 times to create 
+  #the Conference column
   mutate(Conference=factor(c(rep("East", 15), rep("West", 15))))
 
 head(standings)
