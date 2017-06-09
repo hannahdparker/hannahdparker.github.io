@@ -25,36 +25,36 @@ Let's look at the example from last week where we were trying to predict
 team wins. We'll add a new variable to our dataframe called `Conference`
 that will show whether a team is in the east or the west. We'll then use
 this new variable to try and predict team wins.
+```r
+library(dplyr)
 
-    library(dplyr)
+standings<-
+  standings %>%
+  #the dataframe is ordered first 15 in the east, second 15 in the west
+  #we can simply repeat east 15 times followed by west 15 times to create the Conference column
+  mutate(Conference=factor(c(rep("East", 15), rep("West", 15))))
 
-    standings<-
-      standings %>%
-      #the dataframe is ordered first 15 in the east, second 15 in the west
-      #we can simply repeat east 15 times followed by west 15 times to create the Conference column
-      mutate(Conference=factor(c(rep("East", 15), rep("West", 15))))
+head(standings)
 
-    head(standings)
-
-    ##                        Team  W  L  PS/G  PA/G PDiff/G Conference
-    ## 1 Cleveland Cavaliers* (1)  57 25 104.3  98.3     6.0       East
-    ## 2     Toronto Raptors* (2)  56 26 102.7  98.2     4.5       East
-    ## 3          Miami Heat* (3)  48 34 100.0  98.4     1.6       East
-    ## 4       Atlanta Hawks* (4)  48 34 102.8  99.2     3.6       East
-    ## 5      Boston Celtics* (5)  48 34 105.7 102.5     3.2       East
-    ## 6   Charlotte Hornets* (6)  48 34 103.4 100.7     2.7       East
-
+##                        Team  W  L  PS/G  PA/G PDiff/G Conference
+## 1 Cleveland Cavaliers* (1)  57 25 104.3  98.3     6.0       East
+## 2     Toronto Raptors* (2)  56 26 102.7  98.2     4.5       East
+## 3          Miami Heat* (3)  48 34 100.0  98.4     1.6       East
+## 4       Atlanta Hawks* (4)  48 34 102.8  99.2     3.6       East
+## 5      Boston Celtics* (5)  48 34 105.7 102.5     3.2       East
+## 6   Charlotte Hornets* (6)  48 34 103.4 100.7     2.7       East
+```
 With our new categorical conference column created, let's plot the
 relationship between conference and wins. Instead of a scatterplot,
 which we used with a numeric predictor, let's make a box-plot.
+```r
+library(ggplot2)
 
-    library(ggplot2)
-
-    standings %>%
-      ggplot(aes(x=Conference, y=W)) +
-      geom_boxplot(fill="lightblue", alpha=.6) +
-      labs(y="Wins", title="Wins by Conference 2015-16")
-
+standings %>%
+  ggplot(aes(x=Conference, y=W)) +
+  geom_boxplot(fill="lightblue", alpha=.6) +
+  labs(y="Wins", title="Wins by Conference 2015-16")
+```
 ![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-3-1.png)
 
 Just looking at the graph, it doesn't look like we'll see any sort of
@@ -62,31 +62,31 @@ significant difference in wins by conference.
 
 We'll build a linear model using the same method we did last time with
 the `lm` command.
+```r
+set.seed(123)
+standings.lm<- lm(W ~ Conference, data=standings)
 
-    set.seed(123)
-    standings.lm<- lm(W ~ Conference, data=standings)
+summary(standings.lm)
 
-    summary(standings.lm)
-
-    ## 
-    ## Call:
-    ## lm(formula = W ~ Conference, data = standings)
-    ## 
-    ## Residuals:
-    ##      Min       1Q   Median       3Q      Max 
-    ## -30.5333  -8.4667   0.5333   7.4667  31.5333 
-    ## 
-    ## Coefficients:
-    ##                Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)     40.5333     3.6461  11.117 8.84e-12 ***
-    ## ConferenceWest   0.9333     5.1563   0.181    0.858    
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 14.12 on 28 degrees of freedom
-    ## Multiple R-squared:  0.001169,   Adjusted R-squared:  -0.0345 
-    ## F-statistic: 0.03276 on 1 and 28 DF,  p-value: 0.8577
-
+## 
+## Call:
+## lm(formula = W ~ Conference, data = standings)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -30.5333  -8.4667   0.5333   7.4667  31.5333 
+## 
+## Coefficients:
+##                Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)     40.5333     3.6461  11.117 8.84e-12 ***
+## ConferenceWest   0.9333     5.1563   0.181    0.858    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 14.12 on 28 degrees of freedom
+## Multiple R-squared:  0.001169,   Adjusted R-squared:  -0.0345 
+## F-statistic: 0.03276 on 1 and 28 DF,  p-value: 0.8577
+```
 Taking a quick look at the results, it doesn't look like a great model.
 The R-squared value is below 1%, indicating that conference only
 explains about .1% of the variance in wins.
@@ -123,16 +123,16 @@ of a variable based on alphabetic order.
 Because each level of the categorical variable is split, each has its
 own p-value in the `lm` output. We can run an F-test using the `anova`
 command to see if the categorical variable is actually significant.
+```r
+anova(standings.lm)
 
-    anova(standings.lm)
-
-    ## Analysis of Variance Table
-    ## 
-    ## Response: W
-    ##            Df Sum Sq Mean Sq F value Pr(>F)
-    ## Conference  1    6.5   6.533  0.0328 0.8577
-    ## Residuals  28 5583.5 199.410
-
+## Analysis of Variance Table
+## 
+## Response: W
+##            Df Sum Sq Mean Sq F value Pr(>F)
+## Conference  1    6.5   6.533  0.0328 0.8577
+## Residuals  28 5583.5 199.410
+```
 We can see that the p-value is very large and above an alpha of .05. We
 can then assume that conference is not significant in predicting wins.
 
@@ -150,9 +150,9 @@ use average points scored and average points scored against.
 First, let's look at the scatterplots of these two variables against
 wins. Instead of plotting each individually, we can plot them all in a
 scatterplot matrix using the `pairs` command.
-
-    pairs(standings[,c(2,4,5)], upper.panel = panel.smooth)
-
+```r
+pairs(standings[,c(2,4,5)], upper.panel = panel.smooth)
+```
 ![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-6-1.png)
 
 Here I indexed the three columns we'll be looking at. I also specified
@@ -162,32 +162,32 @@ wins, albeit in different directions.
 
 The input for multiple linear regression is similar to the simple input.
 We simply add each variable to the formula using a `+` sign like so:
+```r
+set.seed(123)
+standings.mult<- lm(W ~ `PS/G` + `PA/G`, data=standings)
 
-    set.seed(123)
-    standings.mult<- lm(W ~ `PS/G` + `PA/G`, data=standings)
+summary(standings.mult)
 
-    summary(standings.mult)
-
-    ## 
-    ## Call:
-    ## lm(formula = W ~ `PS/G` + `PA/G`, data = standings)
-    ## 
-    ## Residuals:
-    ##     Min      1Q  Median      3Q     Max 
-    ## -5.7324 -1.7151 -0.2224  1.3844  6.8041 
-    ## 
-    ## Coefficients:
-    ##             Estimate Std. Error t value Pr(>|t|)    
-    ## (Intercept)  40.3874    20.1567   2.004   0.0552 .  
-    ## `PS/G`        2.6424     0.1422  18.577   <2e-16 ***
-    ## `PA/G`       -2.6363     0.1443 -18.267   <2e-16 ***
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-    ## 
-    ## Residual standard error: 2.897 on 27 degrees of freedom
-    ## Multiple R-squared:  0.9595, Adjusted R-squared:  0.9565 
-    ## F-statistic: 319.6 on 2 and 27 DF,  p-value: < 2.2e-16
-
+## 
+## Call:
+## lm(formula = W ~ `PS/G` + `PA/G`, data = standings)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -5.7324 -1.7151 -0.2224  1.3844  6.8041 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)  40.3874    20.1567   2.004   0.0552 .  
+## `PS/G`        2.6424     0.1422  18.577   <2e-16 ***
+## `PA/G`       -2.6363     0.1443 -18.267   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 2.897 on 27 degrees of freedom
+## Multiple R-squared:  0.9595, Adjusted R-squared:  0.9565 
+## F-statistic: 319.6 on 2 and 27 DF,  p-value: < 2.2e-16
+```
 Let's first look at the R-squared value to guage how well the two
 variables together explain the variance in wins. When we have more than
 one predictor, we want to shift our attention to the adjusted R-squared.
@@ -206,9 +206,9 @@ per game and allows 100 points per game would be predicted to have
 
 Let's check out the assumptions we went over in the last tutorial. First
 we'll check for normality of residuals using a qq plot.
-
-    plot(standings.mult, which = 2)
-
+```r
+plot(standings.mult, which = 2)
+```
 ![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-8-1.png)
 
 It does appear that a few points stray a little bit from the qqline.
@@ -219,9 +219,9 @@ normal. If it was more of an issue, we could get into transformations
 
 Next, let's plot the residuals against the predicted value. This will
 help us check for constant variance and linearity.
-
-    plot(standings.mult, which=1)
-
+```r
+plot(standings.mult, which=1)
+```
 ![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-9-1.png)
 
 Since the residuals mainly stick around 0 we can assume linearity. The
@@ -247,15 +247,15 @@ fairly correlated while anything above 10 is a serious issue.
 
 We can check the VIF value in R with the `vif` command in the `usdm`
 library. You'll need to first install the library and then load it in.
+```r
+library(usdm)
 
-    library(usdm)
+vif(standings[, c("PS/G", "PA/G")])
 
-    vif(standings[, c("PS/G", "PA/G")])
-
-    ##   Variables     VIF
-    ## 1      PS/G 1.00384
-    ## 2      PA/G 1.00384
-
+##   Variables     VIF
+## 1      PS/G 1.00384
+## 2      PA/G 1.00384
+```
 It doesn't look like either of the variables break that threshold of 5
 so we don't have much to worry about with collinearity.
 
@@ -263,31 +263,31 @@ With our assumptions out of the way, let's make some predictions with
 our model. Here, I made a dataframe which has each team and their actual
 wins as well as the model's predicted wins and the difference between
 the two.
+```r
+compare<-
+  standings %>%
+  dplyr::select(Team, W) %>%
+  mutate(Predicted_W=predict(standings.mult),
+         Difference=W-Predicted_W)
 
-    compare<-
-      standings %>%
-      dplyr::select(Team, W) %>%
-      mutate(Predicted_W=predict(standings.mult),
-             Difference=W-Predicted_W)
+compare %>%
+  arrange(Difference) %>%
+  head(3)
 
-    compare %>%
-      arrange(Difference) %>%
-      head(3)
+##                          Team  W Predicted_W Difference
+## 1              Utah Jazz (9)  40    45.73237  -5.732365
+## 2 Oklahoma City Thunder* (3)  55    60.30848  -5.308484
+## 3    Philadelphia 76ers (15)  10    14.09549  -4.095486
 
-    ##                          Team  W Predicted_W Difference
-    ## 1              Utah Jazz (9)  40    45.73237  -5.732365
-    ## 2 Oklahoma City Thunder* (3)  55    60.30848  -5.308484
-    ## 3    Philadelphia 76ers (15)  10    14.09549  -4.095486
+compare %>%
+  arrange(-Difference) %>%
+  head(3)
 
-    compare %>%
-      arrange(-Difference) %>%
-      head(3)
-
-    ##                          Team  W Predicted_W Difference
-    ## 1     Memphis Grizzlies* (7)  42    35.19595   6.804054
-    ## 2          Chicago Bulls (9)  42    37.05667   4.943332
-    ## 3 Golden State Warriors* (1)  73    69.56422   3.435780
-
+##                          Team  W Predicted_W Difference
+## 1     Memphis Grizzlies* (7)  42    35.19595   6.804054
+## 2          Chicago Bulls (9)  42    37.05667   4.943332
+## 3 Golden State Warriors* (1)  73    69.56422   3.435780
+```
 After creating the `compare` dataframe, I sorted the top 3 teams that
 underperformed and overperformed based on the predicted amount of wins.
 It looks like the Jazz underperformed by a bit as the model predicted
