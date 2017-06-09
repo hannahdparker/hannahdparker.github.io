@@ -56,7 +56,7 @@ standings %>%
   geom_boxplot(fill="lightblue", alpha=.6) +
   labs(y="Wins", title="Wins by Conference 2015-16")
 ```
-![](linearregression2md_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+<center><img src="/images/conferencebox.PNG"></center>
 
 Just looking at the graph, it doesn't look like we'll see any sort of
 significant difference in wins by conference.
