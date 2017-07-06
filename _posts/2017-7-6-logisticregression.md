@@ -89,7 +89,7 @@ head(pacers)
 ```
 Let's look at a scatter plot of field goal % against the games result.
 
-![](2017-7-6-logisticregression_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+<center><img src="/images/logvslin.PNG"></center>
 
 The y-value is the probability of a win. A linear regression line is
 shown in blue while a logistic line is shown in red. We can see that the
