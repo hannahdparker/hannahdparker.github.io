@@ -18,6 +18,8 @@ team wins or loses a game based on different box score statistics.
 
 ### Data ###
 
+<center><img src="/images/lance-vs-raptors.png"></center>
+
 For this tutorial, we are going to try and predict the outcome of games
 the Pacers played in the 2016-17 season. I'll try and hide any
 dissapointment from the Paul George trade. If I start sounding depressed
