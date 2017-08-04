@@ -178,6 +178,8 @@ testing results!
 
 ### K-Fold Cross Validation ###
 
+<center><img src="/images/lance-vs-raptors.png"></center>
+
 Although the training/testing approach is straightforward and simple, it
 can have issues. Specifically, we could run into high variance in our
 result measures. With only one split in the data taking place, we could
@@ -210,7 +212,8 @@ library; a lot are, though, and are listed within the `caret`
 documentation.
 ```r
 set.seed(1234)
-fold.lm<- train(WS ~ TS. + USG., data=adv.stats, trControl=model.control, method="lm")
+fold.lm<- train(WS ~ TS. + USG., data=adv.stats, trControl=model.control, 
+                method="lm")
 
 fold.lm
 
