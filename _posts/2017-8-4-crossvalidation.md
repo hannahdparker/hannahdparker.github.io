@@ -178,7 +178,7 @@ testing results!
 
 ### K-Fold Cross Validation ###
 
-<center><img src="/images/lance-vs-raptors.png"></center>
+<center><img src="/images/crawford-dribbles.jpg"></center>
 
 Although the training/testing approach is straightforward and simple, it
 can have issues. Specifically, we could run into high variance in our
