@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Decision Trees Pt. 1"
+date: 2017-12-05 00:00:00
+excerpt_separator: <!--more-->
+---
+
 So far, we've looked at parametric models. These are models that have
 set assumptions that are required to make them statistically valid.
 There are other classes of bad-boy type models that don't follow the
@@ -5,6 +12,8 @@ rules, and don't really care. One of the more popular types that we'll
 go over today is the basic decision tree. This lesson is going to cover
 the basics of a simple decision tree model, but we'll expand on it much
 more in the near future.
+
+<!--more-->
 
 ### The Basics of a Decision Tree ###
 
