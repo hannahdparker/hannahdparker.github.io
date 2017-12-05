@@ -121,7 +121,8 @@ library(rpart.plot)
 
 rpart.plot(simple.dt)
 ```
-![](2017-12-5_decisiontrees1_files/figure-markdown_strict/unnamed-chunk-3-1.png)
+
+<center><img src="/images/dt.png"></center>
 
 We can see the flow of this decision tree relatively easily. The first
 node captures all the observations and shows the result, the percentage
