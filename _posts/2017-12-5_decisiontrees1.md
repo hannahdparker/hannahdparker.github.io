@@ -122,7 +122,7 @@ library(rpart.plot)
 rpart.plot(simple.dt)
 ```
 
-<center><img src="/images/dt.png"></center>
+<center><img src="/images/dt.PNG"></center>
 
 We can see the flow of this decision tree relatively easily. The first
 node captures all the observations and shows the result, the percentage
