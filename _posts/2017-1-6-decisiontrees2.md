@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Decision Trees Pt. 2: Bagged Trees and Random Forest"
-date: 2017-01-06 00:00:00
+date: 2018-01-06 00:00:00
 excerpt_separator: <!--more-->
 ---
 
