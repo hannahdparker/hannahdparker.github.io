@@ -80,7 +80,8 @@ Let's create a basic training and testing dataset with `caret`.
 library(caret)
 
 set.seed(1234)
-sl_split<- createDataPartition(shot_log$SHOT_RESULT, p=.75, list=F) #75/25 training testing split
+#75/25 training testing split
+sl_split<- createDataPartition(shot_log$SHOT_RESULT, p=.75, list=F) 
 
 training<- shot_log[sl_split, ]
 testing<- shot_log[-sl_split, ]
@@ -105,7 +106,9 @@ models).
 ```r
 set.seed(1234)
 
-model<- bagging(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data=training, coob=T, nbagg=10)
+model<- bagging(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + 
+                TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data=training, 
+                coob=T, nbagg=10)
 
 print(model)
 
@@ -216,7 +219,9 @@ random variables. The model is also a bit quicker than the `bagging()`
 function in `ipred` so it's not as big of a computational burden.
 ```r
 set.seed(1234)
-model.rf<- randomForest(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data=training.complete, ntrees=300, mtry=3, importance=T)
+model.rf<- randomForest(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + 
+                        TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data=training.complete, 
+                        ntrees=300, mtry=3, importance=T)
 
 model.rf
 
