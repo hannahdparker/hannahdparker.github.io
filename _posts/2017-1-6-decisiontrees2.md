@@ -228,7 +228,10 @@ model.rf
 
 ## 
 ## Call:
-##  randomForest(formula = SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK +      DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data = training.complete,      ntrees = 300, mtry = 3, importance = T) 
+##  randomForest(formula = SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK +      
+##               DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
+##               data = training.complete,      
+##               ntrees = 300, mtry = 3, importance = T) 
 ##                Type of random forest: classification
 ##                      Number of trees: 500
 ## No. of variables tried at each split: 3
