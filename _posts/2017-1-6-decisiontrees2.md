@@ -219,8 +219,9 @@ random variables. The model is also a bit quicker than the `bagging()`
 function in `ipred` so it's not as big of a computational burden.
 ```r
 set.seed(1234)
-model.rf<- randomForest(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + 
-                        TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, data=training.complete, 
+model.rf<- randomForest(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + 
+                        DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
+                        data=training.complete, 
                         ntrees=300, mtry=3, importance=T)
 
 model.rf
