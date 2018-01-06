@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Decision Trees Pt. 2: Bagged Trees and Random Forest"
+date: 2017-01-06 00:00:00
+excerpt_separator: <!--more-->
+---
+
 In the last tutorial, we saw the basics of a single decision tree. While
 easy to interpret and understand, it still leaves some things to be
 desired. In general CARTs (Classification and Regression Tree) are lazy
@@ -7,6 +14,8 @@ interpretations. To address this, we can use ensemble methods, creating
 several tree models rather than relying on a single tree. Two related
 ensemble tree methods we'll look at in this tutorial are bagged trees
 and random forest.
+
+<!--more-->
 
 Data
 ====
