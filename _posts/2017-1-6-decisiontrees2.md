@@ -58,11 +58,16 @@ observation for a bootstrapped sample; I could see observation 1 was
 picked 5 times, but observation 2 was never picked.
 
 Applying this process to decision tree building, we can create `x`
-number of bootstrapped samples and build a model on each one.
+number of bootstrapped samples and build a model on each one. To make
+predictions on all these trees, we either average the prediction for
+each tree for regression problems, or use a majority vote for 
+classification problems (each tree gets a vote as to what class each
+observation should be predicted as).
+
 Observations that weren't picked for each sample can act as a sort of
-test set for each model; this is known as the out of bag (OOB) error. We
-can then average this pseudo test set error across each of the `x`
-models.
+test set for each model; this is known as the out of bag (OOB) error. For
+each observation, we can look up which trees didn't include it and input
+it as a sort of test set.
 
 This helps lower issues of variance because with a bagged tree model,
 we're actually creating several models off slightly different datasets
@@ -310,7 +315,7 @@ Our overall accuracy increased, but our sensitivity actually decreased.
 The random forest model worked well at predicting misses, but struggled
 a bit to predict makes. It might be worth it to look at changing up some
 model arguments to see if we can get more balanced results (but I'm
-tired of typing so you can do it).
+tired of typing so you do it).
 
 ### Conclusion ###
 
