@@ -1,4 +1,9 @@
+---
+layout: post
+title: "Decision Trees Pt. 3: Boosted Decision Trees"
+date: 2018-02-26 00:00:00
 excerpt_separator: <!--more-->
+---
 
 The past two tutorials have focused on different models involving a
 tree-based structure. The last one gave an introduction to the idea of
