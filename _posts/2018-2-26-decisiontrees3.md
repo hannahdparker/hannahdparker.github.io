@@ -1,8 +1,12 @@
+excerpt_separator: <!--more-->
+
 The past two tutorials have focused on different models involving a
 tree-based structure. The last one gave an introduction to the idea of
 ensemble modeling, or combining multiple models together to get a better
 prediction. This lesson focuses on a different type of ensemble model
 called boosting.
+
+<!--more-->
 
 The previous ensemble model we went over was bagging, in which we create
 many separate models based on different samples of data from which we
