@@ -161,11 +161,12 @@ library(dplyr)
 
 shot_log<-
   shot_log %>%
-  mutate(SHOT_RESULT = relevel(SHOT_RESULT, "missed")) %>% #releveling the factor so the first level is missed
-                                                           #and second is made
-  mutate(SHOT_RESULT_NUM = as.numeric(SHOT_RESULT)-1) #taking the numeric version of the factor (which is 1 for
-                                                      #missed and 2 for made) and subtracting one, so it's now
-                                                      #treated as 0 for missed and 1 for made
+  #releveling the factor so the first level is missed and second is made
+  mutate(SHOT_RESULT = relevel(SHOT_RESULT, "missed")) %>%
+  #taking the numeric version of the factor (which is 1 for
+  #missed and 2 for made) and subtracting one, so it's now
+  #treated as 0 for missed and 1 for made
+  mutate(SHOT_RESULT_NUM = as.numeric(SHOT_RESULT)-1)
 ```
 Now we'll split our dataset into a training and testing set, using a
 75/25 partition.
@@ -173,7 +174,8 @@ Now we'll split our dataset into a training and testing set, using a
 library(caret)
 
 set.seed(1234)
-sl_split<- createDataPartition(shot_log$SHOT_RESULT, p=.75, list=F) #75/25 training testing split
+#75/25 training testing split
+sl_split<- createDataPartition(shot_log$SHOT_RESULT, p=.75, list=F)
 
 training<- shot_log[sl_split, ]
 testing<- shot_log[-sl_split, ]
@@ -185,7 +187,8 @@ slightly different). We'll be using the same variables used in the
 bagging lesson to predict the result of a shot.
 ```r
 set.seed(1234)
-gbm.model<- gbm(SHOT_RESULT_NUM ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
+gbm.model<- gbm(SHOT_RESULT_NUM ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES 
+                + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
                 data=training, n.trees = 500, interaction.depth = 3,
                 n.minobsinnode = 25, shrinkage = .01)
 
@@ -227,7 +230,8 @@ predictions are rounded so the actual class predictions are stored (1 or
 0). The `confusionMatrix` function from `caret` is used to create a
 confusion matrix; the positive class is specified as 1 or made shot.
 ```r
-gbm.pred<- round(predict(gbm.model, n.trees = gbm.model$n.trees, type = "response", newdata = testing), 0)
+gbm.pred<- round(predict(gbm.model, n.trees = gbm.model$n.trees, 
+                 type = "response", newdata = testing), 0)
 
 confusionMatrix(gbm.pred, testing$SHOT_RESULT_NUM, positive = "1")
 
