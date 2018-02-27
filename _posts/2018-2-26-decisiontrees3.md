@@ -196,7 +196,7 @@ gbm.model<- gbm(SHOT_RESULT_NUM ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES
 
 summary(gbm.model) #look at model output
 ```
-<br><center><img src="/images/relative influence.jpg"></center>
+<br><center><img src="/images/relative influence.JPG"></center>
 ```r
 ##                           var     rel.inf
 ## SHOT_DIST           SHOT_DIST 61.34414401
