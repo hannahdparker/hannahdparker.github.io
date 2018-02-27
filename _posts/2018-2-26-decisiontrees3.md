@@ -196,7 +196,7 @@ gbm.model<- gbm(SHOT_RESULT_NUM ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES
 
 summary(gbm.model) #look at model output
 ```
-![](2018-2-26-decisiontrees3_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+<br><center><img src="/images/relative influence.jpg"></center>
 ```r
 ##                           var     rel.inf
 ## SHOT_DIST           SHOT_DIST 61.34414401
