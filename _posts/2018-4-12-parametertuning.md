@@ -37,7 +37,8 @@ because the methods we'll be using today are pretty time expensive.
 shot_log<- read.csv("~/R/examples/blog/January 2018/shot log.csv")
 
 set.seed(1234)
-shot_log<- shot_log[sample(1:length(shot_log$GAME_ID), size=5000, replace = F),]
+shot_log<- shot_log[sample(1:length(shot_log$GAME_ID), 
+                           size=5000, replace = F),]
 ```
 # Modeling in Caret #
 
@@ -60,7 +61,8 @@ on each resample.
 ```r
 library(caret)
 
-control<- trainControl(method = "repeatedcv", number= 3, repeats = 3, savePredictions = T, classProbs = T)
+control<- trainControl(method = "repeatedcv", number= 3, repeats = 3, 
+                       savePredictions = T, classProbs = T)
 ```
 Now here's an additional step we didn't go over in the cross-validation
 tutorial: setting a tuning grid of possible parameters. These are
@@ -70,14 +72,17 @@ specific parameter to illustrate: `n.trees`. Here, we specify either
 doing is building three cross-validated models, one for each of the
 number of tree parameters. All other parameters would be held constant.
 ```r
-tune<- expand.grid(n.trees=c(250, 500, 750), interaction.depth=3, shrinkage=.01, n.minobsinnode=15)
+tune<- expand.grid(n.trees=c(250, 500, 750), interaction.depth=3, 
+                   shrinkage=.01, n.minobsinnode=15)
 ```
 With these steps down, let's build a model using caret. We'll specify
 `method = "gbm"` and set `trControl = control` and `tuneGrid = tune`.
 ```r
 set.seed(1234)
-sl.gbm<- train(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
-               data = na.omit(shot_log), method = "gbm", trControl = control, tuneGrid = tune, verbose = F)
+sl.gbm<- train(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES 
+               + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
+               data = na.omit(shot_log), method = "gbm", 
+               trControl = control, tuneGrid = tune, verbose = F)
 
 sl.gbm
 
@@ -140,11 +145,14 @@ multiple parameters can be very time consuming.
 
 Let's try adjusting not only `ntrees`, but also the `shrinkage`.
 ```r
-tune2<- expand.grid(n.trees=c(250, 500, 750), interaction.depth=3, shrinkage=c(.005, .01, .05), n.minobsinnode=15)
+tune2<- expand.grid(n.trees=c(250, 500, 750), interaction.depth=3, 
+                    shrinkage=c(.005, .01, .05), n.minobsinnode=15)
 
 set.seed(1234)
-sl.gbm2<- train(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
-               data = na.omit(shot_log), method = "gbm", trControl = control, tuneGrid = tune2, verbose = F)
+sl.gbm2<- train(SHOT_RESULT ~ LOCATION + PERIOD + SHOT_CLOCK + DRIBBLES 
+                + TOUCH_TIME + SHOT_DIST + CLOSE_DEF_DIST, 
+                data = na.omit(shot_log), method = "gbm", 
+                trControl = control, tuneGrid = tune2, verbose = F)
 
 sl.gbm2
 
