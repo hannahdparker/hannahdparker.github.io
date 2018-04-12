@@ -194,7 +194,7 @@ shrinkage rates.
 ```r
 plot(sl.gbm2)
 ```
-<br><center><img src="/images/carettuning.JPG"></center>
+<br><center><img src="/images/carettuning.PNG"></center>
 
 # Finishing Up #
 
