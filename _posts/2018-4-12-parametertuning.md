@@ -194,7 +194,7 @@ shrinkage rates.
 ```r
 plot(sl.gbm2)
 ```
-![](2018-4-12-parametertuning_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+<br><center><img src="/images/carettuning.JPG"></center>
 
 # Finishing Up #
 
