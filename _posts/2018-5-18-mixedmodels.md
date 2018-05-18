@@ -146,7 +146,8 @@ into one dataframe!
 ```r
 pacer.stats<-
   pacer.stats %>%
-  #have to rename joe young because he has a different name in the draft dataframe
+  #have to rename joe young because he has a different name in the draft 
+  # dataframe
   mutate(Player=ifelse(Player=="Joe Young", "Joseph Young", Player)) %>%
   #new column for when the player was drafted
   mutate(Round=ifelse(Player %in% round1$Player, "Round 1",
