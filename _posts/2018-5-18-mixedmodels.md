@@ -70,12 +70,14 @@ pacer.rookies<-
   #using lapply to loop through the years 2000-2018
   lapply(2000:2018, function(x) 
     #we'll be pasting the years into the Pacer team page url
-    paste("https://www.basketball-reference.com/teams/IND/",x,".html", sep = "") %>%
+    paste("https://www.basketball-reference.com/teams/IND/",x,".html", 
+          sep = "") %>%
       read_html(xpath='//*[@id="roster"]') %>%
       html_table() %>%
       .[[1]] %>%
       `colnames<-` (make.names(colnames(.))) %>%
-      #we'll filter on the experience column for anyone labeled as "R" for rookie
+      #we'll filter on the experience column for anyone labeled as "R" 
+      # for rookie
       filter(Exp=="R") %>%
       mutate(Rookie.Season=x)
     ) %>%
@@ -88,7 +90,8 @@ Next, we'll grab all of the stats for these players.
 pacer.stats<-
   lapply(2000:2018, function(x) 
   #loop through the advanced stat page to get win shares from 2000-2018
-  paste("https://www.basketball-reference.com/leagues/NBA_",x,"_advanced.html", 
+  paste("https://www.basketball-reference.com/leagues/NBA_",x,
+        "_advanced.html", 
         sep = "") %>%
   read_html() %>%
   html_node(xpath='//*[@id="advanced_stats"]') %>%
@@ -112,7 +115,8 @@ drafted earlier, but didn't start playing until 1999-2000.
 draft<-
   lapply(1995:2017, function(x) 
     #loop throught the draft page from 1995-2017
-    paste("https://www.basketball-reference.com/draft/NBA_", x, ".html", sep="") %>%
+    paste("https://www.basketball-reference.com/draft/NBA_", x, ".html", 
+          sep="") %>%
   read_html() %>%
   html_node(xpath='//*[@id="stats"]') %>%
   html_table() %>%
@@ -120,7 +124,8 @@ draft<-
   `colnames<-` (make.names(colnames(.), unique = T)) %>%
   .[-1,] %>%
   #round 2 is listed as a row; every row after it is a 2nd rounder
-  mutate(Round=ifelse(as.numeric(rownames(.))>as.numeric(rownames(.[.$Player=="Round 2",])),
+  mutate(Round=ifelse(as.numeric(rownames(.))>
+                      as.numeric(rownames(.[.$Player=="Round 2",])),
                       "Round 2", "Round 1")) %>%
   filter(Player != "Player") %>%
   filter(Player != "Round 2") %>%
@@ -145,7 +150,8 @@ pacer.stats<-
   mutate(Player=ifelse(Player=="Joe Young", "Joseph Young", Player)) %>%
   #new column for when the player was drafted
   mutate(Round=ifelse(Player %in% round1$Player, "Round 1",
-                      ifelse(Player %in% round2$Player, "Round 2", "Undrafted"))) %>%
+                      ifelse(Player %in% round2$Player, "Round 2", 
+                             "Undrafted"))) %>%
   #filter for only the first four seasons
   filter(Season.Number<=4) %>%
   #merging with made up dataframe to get age player was as a rookie
@@ -310,7 +316,8 @@ to some convergence issues, I'm changing up the default optimizer for
 the model.
 ```r
 model.3<- lme(WS ~ Season.Number + Round, random = (~Season.Number | Player), 
-              data = pacer.stats, method="ML", control = lmeControl(opt = "optim"))
+              data = pacer.stats, method="ML", 
+              control = lmeControl(opt = "optim"))
 
 summary(model.3)
 
