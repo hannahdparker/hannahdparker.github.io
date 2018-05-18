@@ -179,7 +179,7 @@ pacer.stats %>%
   stat_smooth(method="lm", se=F) +
   geom_jitter(alpha=.5, width = .2)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-5-1.png)
+<br><center><img src="/images/lookatdata1.PNG"></center>
 
 We can get a better idea of the effect of round via a boxplot. The
 median win shares value is much higher for round 1 players while round 2
@@ -190,7 +190,7 @@ pacer.stats %>%
   geom_jitter(width = .2) +
   geom_boxplot(alpha=.3)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-6-1.png)
+<br><center><img src="/images/lookatdata2.PNG"></center>
 
 If we look at rookie age and win shares, we see a negative relationship.
 Players who were drafted older, tend not to produce as many win shares.
@@ -200,7 +200,7 @@ pacer.stats %>%
   geom_point() +
   geom_smooth(method = "lm", se=F)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+<br><center><img src="/images/lookatdata3.PNG"></center>
 
 # Developing a Mixed-Effects Model #
 
@@ -467,7 +467,7 @@ the `plot()` function on our model.
 ```r
 plot(model.4)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+<br><center><img src="/images/assumptions1.PNG"></center>
 
 A lot of observations seem to cluster in the lower left area of the
 plot, so there may be some issue with the homogenous variance
@@ -484,7 +484,7 @@ pacer.stats %>%
   geom_jitter(width = .2) +
   geom_boxplot(alpha=.5)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+<br><center><img src="/images/assumptions2.PNG"></center>
 
 The variance between seasons doesn't seem so bad here.
 
@@ -495,17 +495,17 @@ the `qqnorm()` function. We can call the random effects again using the
 qqnorm(model.4$residuals)
 qqline(model.4$residuals)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+<br><center><img src="/images/assumptions3.PNG"></center>
 ```r
 qqnorm(ranef(model.4)$`(Intercept)`)
 qqline(ranef(model.4)$`(Intercept)`)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-16-2.png)
+<br><center><img src="/images/assumptions4.PNG"></center>
 ```r
 qqnorm(ranef(model.4)$Season.Number)
 qqline(ranef(model.4)$Season.Number)
 ```
-![](2018-5-18_files/figure-markdown_strict/unnamed-chunk-16-3.png)
+<br><center><img src="/images/assumptions5.PNG"></center>
 
 It looks like there might be some normality assumptions, especially with
 the random slope for `Season.Number`. Adding some transformations might
