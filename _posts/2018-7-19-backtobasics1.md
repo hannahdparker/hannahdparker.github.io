@@ -17,7 +17,7 @@ actual know-it-all-ism in a series I like to call, "Back to Basics".
 
 <!--more-->
 
-<br><center><img src="shaq-reading.jpg"></center>
+<br><center><img src="/images/shaq-reading.jpg"></center>
 
 Data
 ====
