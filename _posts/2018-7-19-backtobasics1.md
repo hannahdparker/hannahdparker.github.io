@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Back to Basics: Measuring Spread and Correlation"
+date: 2018-07-09 00:00:00
+excerpt_separator: <!--more-->
+---
+
 Up till now, we've gone over a lot of different topics, some
 complicated, and some not so much. In this tutorial, I want to go over a
 collection of more basic ideas that may not require their own post, but
@@ -8,6 +15,8 @@ gives us even MORE credibility. Take off the temporary mask of
 faux-know-it-all-ism and get the permanent facial reconstruction of
 actual know-it-all-ism in a series I like to call, "Back to Basics".
 
+<!--more-->
+
 Data
 ====
 
@@ -15,14 +24,15 @@ The data we'll be using today are player weights and heights from the
 2014 season. This info was gathered by Simon Warchol and generously
 posted on his Github page. We'll grab it right from his page and put it
 into `R`.
+```r
+library(dplyr)
 
-    library(dplyr)
-
-    #Grabbing the csv directly from Simon's Github page
-    player.info<- 
-      read.csv("https://raw.githubusercontent.com/simonwarchol/NBA-Height-Weight/master/CSVs/Yearly/2014.csv") %>%
-      rename(Height=Height..Inches.)
-
+#Grabbing the csv directly from Simon's Github page
+player.info<- 
+  read.csv("https://raw.githubusercontent.com/simonwarchol/
+            NBA-Height-Weight/master/CSVs/Yearly/2014.csv") %>%
+  rename(Height=Height..Inches.)
+```
 Measuring Spread
 ================
 
@@ -39,18 +49,18 @@ then average all of those together.
 In this case, we are working with a sample from a larger population of
 basketball players, so instead of averaging over the entire dataset,
 *n*, we average over *n* − 1
+```r
+#variance of weight by hand
+weight.squared.diff<- (player.info$Weight-mean(player.info$Weight))^2
+sum(weight.squared.diff)/(nrow(player.info)-1)
 
-    #variance of weight by hand
-    weight.squared.diff<- (player.info$Weight-mean(player.info$Weight))^2
-    sum(weight.squared.diff)/(nrow(player.info)-1)
+## [1] 689.1512
 
-    ## [1] 689.1512
+#using R
+var(player.info$Weight)
 
-    #using R
-    var(player.info$Weight)
-
-    ## [1] 689.1512
-
+## [1] 689.1512
+```
 Notice that they are slightly off. That is because `var()` calculates
 the sample variance rather than the population variance (instead of just
 averaging the squared differences, it sums them up and then divides by
@@ -59,17 +69,17 @@ the total observations-1).
 The standard deviation is just the square root of the variance. It is a
 bit easier to interpret because it puts the measure of spread back on a
 level similar to the original data.
+```r
+#standard deviation by hand (again, this is the population standard deviation)
+sqrt(sum(weight.squared.diff)/(nrow(player.info)-1))
 
-    #standard deviation by hand (again, this is the population standard deviation)
-    sqrt(sum(weight.squared.diff)/(nrow(player.info)-1))
+## [1] 26.25169
 
-    ## [1] 26.25169
+#using R
+sd(player.info$Weight)
 
-    #using R
-    sd(player.info$Weight)
-
-    ## [1] 26.25169
-
+## [1] 26.25169
+```
 We can see whether the relationship between two variables is positive or
 negative by calculating the covariance. The sample covariance equation
 looks like this:
@@ -81,17 +91,17 @@ products up. Finally, we divide by the total amount of observations-1.
 
 Let's see how we'd compute the covariance between player weight and
 height in R.
+```r
+#calculating it manually
+sum((player.info$Weight-mean(player.info$Weight))*(player.info$Height-mean(player.info$Height)))/(nrow(player.info)-1)
 
-    #calculating it manually
-    sum((player.info$Weight-mean(player.info$Weight))*(player.info$Height-mean(player.info$Height)))/(nrow(player.info)-1)
+## [1] 73.38047
 
-    ## [1] 73.38047
+#using R
+cov(player.info$Weight, player.info$Height)
 
-    #using R
-    cov(player.info$Weight, player.info$Height)
-
-    ## [1] 73.38047
-
+## [1] 73.38047
+```
 So we can tell from this that there is a positive relationship between
 weight and height of players.
 
@@ -133,17 +143,17 @@ Let's go back to our player weight and height info. A covariance value
 of 73 doesn't tell us much beyond heavier players are also taller. What
 scale is that number on, pounds or inches? Is it large? Calculating the
 correlation coefficient will help tell us this.
+```r
+#calculating it manually
+cov(player.info$Weight, player.info$Height)/(sd(player.info$Weight)*sd(player.info$Height))
 
-    #calculating it manually
-    cov(player.info$Weight, player.info$Height)/(sd(player.info$Weight)*sd(player.info$Height))
+## [1] 0.8078669
 
-    ## [1] 0.8078669
+#using R
+cor(player.info$Weight, player.info$Height)
 
-    #using R
-    cor(player.info$Weight, player.info$Height)
-
-    ## [1] 0.8078669
-
+## [1] 0.8078669
+```
 Now the Pearson correlation coefficient does have an assumption of
 normality. If the variables we were comparing did not come from a normal
 distribution, we could calculate a different correlation coefficient.
@@ -155,21 +165,21 @@ numbers themselves. You can calculate using the `method` argument in
 We can also run a correlation test to identify if the correlation
 between two variables is significantly different from 0. `cor.test` can
 be used to run one in `R`.
+```r
+cor.test(player.info$Weight, player.info$Height)
 
-    cor.test(player.info$Weight, player.info$Height)
-
-    ## 
-    ##  Pearson's product-moment correlation
-    ## 
-    ## data:  player.info$Weight and player.info$Height
-    ## t = 30.031, df = 480, p-value < 2.2e-16
-    ## alternative hypothesis: true correlation is not equal to 0
-    ## 95 percent confidence interval:
-    ##  0.7744309 0.8368026
-    ## sample estimates:
-    ##       cor 
-    ## 0.8078669
-
+## 
+##  Pearson's product-moment correlation
+## 
+## data:  player.info$Weight and player.info$Height
+## t = 30.031, df = 480, p-value < 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.7744309 0.8368026
+## sample estimates:
+##       cor 
+## 0.8078669
+```
 Here we can see that our p-value is below .05, indicating a significant
 linear relationship between player weight and height. Our estimated
 correlation is again around 81% and the 95% confidence interval goes
@@ -181,44 +191,44 @@ normality. If we didn't meet those, though, we could simply change the
 Spearman's. In our case, although the variables appear to linearly
 related, neither passes the Shapiro-Wilke's test for normality. We can
 rerun `cor.test` using a non-parametric method.
+```r
+library(ggplot2)
 
-    library(ggplot2)
+#checking out normality with a Shapiro-Wilke's Test
+shapiro.test(player.info$Weight)
 
-    #checking out normality with a Shapiro-Wilke's Test
-    shapiro.test(player.info$Weight)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  player.info$Weight
+## W = 0.98832, p-value = 0.0006742
 
-    ## 
-    ##  Shapiro-Wilk normality test
-    ## 
-    ## data:  player.info$Weight
-    ## W = 0.98832, p-value = 0.0006742
+shapiro.test(player.info$Height)
 
-    shapiro.test(player.info$Height)
+## 
+##  Shapiro-Wilk normality test
+## 
+## data:  player.info$Height
+## W = 0.97054, p-value = 2.901e-08
 
-    ## 
-    ##  Shapiro-Wilk normality test
-    ## 
-    ## data:  player.info$Height
-    ## W = 0.97054, p-value = 2.901e-08
-
-    #checking out linearity graphically
-    ggplot(aes(Weight, Height), data=player.info) +
-      geom_point()
-
+#checking out linearity graphically
+ggplot(aes(Weight, Height), data=player.info) +
+  geom_point()
+```
 ![](2018-7-19-backtobasics1_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+```
+cor.test(player.info$Weight, player.info$Height, method="spearman")
 
-    cor.test(player.info$Weight, player.info$Height, method="spearman")
-
-    ## 
-    ##  Spearman's rank correlation rho
-    ## 
-    ## data:  player.info$Weight and player.info$Height
-    ## S = 3154700, p-value < 2.2e-16
-    ## alternative hypothesis: true rho is not equal to 0
-    ## sample estimates:
-    ##       rho 
-    ## 0.8309678
-
+## 
+##  Spearman's rank correlation rho
+## 
+## data:  player.info$Weight and player.info$Height
+## S = 3154700, p-value < 2.2e-16
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+## 0.8309678
+```
 It appears that using the non-parametric test still indicates that there
 is a significant linear relationship between player weight and height.
 
