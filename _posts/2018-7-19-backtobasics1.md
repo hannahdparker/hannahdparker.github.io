@@ -17,6 +17,8 @@ actual know-it-all-ism in a series I like to call, "Back to Basics".
 
 <!--more-->
 
+<br><center><img src="shaq-reading.jpg"></center>
+
 Data
 ====
 
@@ -93,7 +95,8 @@ Let's see how we'd compute the covariance between player weight and
 height in R.
 ```r
 #calculating it manually
-sum((player.info$Weight-mean(player.info$Weight))*(player.info$Height-mean(player.info$Height)))/(nrow(player.info)-1)
+sum((player.info$Weight-mean(player.info$Weight))*(player.info$Height-
+     mean(player.info$Height)))/(nrow(player.info)-1)
 
 ## [1] 73.38047
 
@@ -145,7 +148,8 @@ scale is that number on, pounds or inches? Is it large? Calculating the
 correlation coefficient will help tell us this.
 ```r
 #calculating it manually
-cov(player.info$Weight, player.info$Height)/(sd(player.info$Weight)*sd(player.info$Height))
+cov(player.info$Weight, player.info$Height)/
+    (sd(player.info$Weight)*sd(player.info$Height))
 
 ## [1] 0.8078669
 
@@ -215,7 +219,7 @@ shapiro.test(player.info$Height)
 ggplot(aes(Weight, Height), data=player.info) +
   geom_point()
 ```
-![](2018-7-19-backtobasics1_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+<br><center><img src="/images/heightweight.PNG"></center>
 ```
 cor.test(player.info$Weight, player.info$Height, method="spearman")
 
