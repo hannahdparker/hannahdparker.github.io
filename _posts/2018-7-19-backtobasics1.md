@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Back to Basics: Measuring Spread and Correlation"
-date: 2018-07-09 00:00:00
+date: 2018-07-19 00:00:00
 excerpt_separator: <!--more-->
 ---
 
