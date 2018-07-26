@@ -35,13 +35,13 @@ player.info<-
             NBA-Height-Weight/master/CSVs/Yearly/2014.csv") %>%
   rename(Height=Height..Inches.)
 ```
-Measuring Spread
-================
+
+### Measuring Spread ###
 
 One thing that gets brought up a lot about data is how spread out it is.
 We have a couple of ways to measure this, but the most common are
 variance and standard deviation. The variance can be represented as
-*σ*<sup>2</sup> while the standard deviation is just *σ*.
+<a href="https://www.codecogs.com/eqnedit.php?latex=\sigma&space;^{2}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sigma&space;^{2}" title="\sigma ^{2}" /></a> while the standard deviation is just <a href="https://www.codecogs.com/eqnedit.php?latex=\sigma" target="_blank"><img src="https://latex.codecogs.com/gif.latex?\sigma" title="\sigma" /></a>.
 
 All the variance is is the average squared difference from the mean
 value. So if we were interested in the variance of player weights, we
@@ -50,7 +50,7 @@ then average all of those together.
 
 In this case, we are working with a sample from a larger population of
 basketball players, so instead of averaging over the entire dataset,
-*n*, we average over *n* − 1
+<a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a>, we average over <a href="https://www.codecogs.com/eqnedit.php?latex=n-1" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n-1" title="n-1" /></a>
 ```r
 #variance of weight by hand
 weight.squared.diff<- (player.info$Weight-mean(player.info$Weight))^2
@@ -86,7 +86,7 @@ We can see whether the relationship between two variables is positive or
 negative by calculating the covariance. The sample covariance equation
 looks like this:
 
-$$s\_{xy}=\\frac{\\Sigma (x-mean(x))(y-mean(y))}{n-1}$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=cov(xy)=\frac{\Sigma&space;(x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cov(xy)=\frac{\Sigma&space;(x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" title="cov(xy)=\frac{\Sigma (x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" /></a>
  We first find the difference between each value of both `x` and `y` and
 their respective means. We then multiply each pairing and sum all of the
 products up. Finally, we divide by the total amount of observations-1.
@@ -127,10 +127,11 @@ When most people are talking correlation, they are talking Pearson
 correlation. Let's take a look at the formula to get an understanding of
 what exactly is being calculated in the Pearson correlation formula:
 
-$$r = \\frac{\\Sigma(x - mean(x))(y-mean(y))}{\\sqrt{\\Sigma(x-mean(x))^2\\Sigma(y-mean(y))^2}} $$
+<a href="https://www.codecogs.com/eqnedit.php?latex=r=\frac{\Sigma&space;(x-mean(x)(y-mean(y)))}{\sqrt{\Sigma(x-mean(x))^{2}\Sigma(y-mean(y))^{2}}}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r=\frac{\Sigma&space;(x-mean(x)(y-mean(y)))}{\sqrt{\Sigma(x-mean(x))^{2}\Sigma(y-mean(y))^{2}}}" title="r=\frac{\Sigma (x-mean(x)(y-mean(y)))}{\sqrt{\Sigma(x-mean(x))^{2}\Sigma(y-mean(y))^{2}}}" /></a>
+
  Hmm... This looks pretty familiar... It's actually equivalent to this:
 
-$$r = \\frac{cov(x, y)}{sd(x)sd(y)}$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=r=\frac{cov(xy)}{sd(x)sd(y)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?r=\frac{cov(xy)}{sd(x)sd(y)}" title="r=\frac{cov(xy)}{sd(x)sd(y)}" /></a>
 
 The correlation is actually just the covariance of `x` and `y`, but
 divided by the product of the standard deviations of `x` and `y`.
