@@ -87,6 +87,7 @@ negative by calculating the covariance. The sample covariance equation
 looks like this:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=cov(xy)=\frac{\Sigma&space;(x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?cov(xy)=\frac{\Sigma&space;(x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" title="cov(xy)=\frac{\Sigma (x_{i}-mean(x))(y_{i}-mean(y))}{n-1}" /></a>
+
  We first find the difference between each value of both `x` and `y` and
 their respective means. We then multiply each pairing and sum all of the
 products up. Finally, we divide by the total amount of observations-1.
