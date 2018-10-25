@@ -174,7 +174,8 @@ The first thing we see is the distribution of residuals. This is the
 difference between the actual response variable and the predicted value.
 We also see our coefficients for each variable. It does appear that the
 average point difference per game is significant in predicting wins,
-based on the p-value.
+based on the p-value. The p-value is based on the t-value, in this case,
+the ratio of the coefficient estimate and the standard error.
 
 You may be wondering if there is a way to tell how well the model
 performs. The most straightforward way is by looking at the R-squared
@@ -212,14 +213,15 @@ plot(standings.lm, which = 1)
 ```
 <center><img src="/images/convar.PNG"></center>
 
-We don't want to see any sort of trend in this graph. The red line shows
-the smoothness of the points; for the assumption to hold, it should
-stick relatively around the 0 and show no real pattern. In this case it
-does, so we can say the model meets this assumption. We can also use
+For the constant variance assumption to be met, we should see points 
+scattered evenly around 0 on the y-axis for all fitted values. If the
+assumption is not met, we'll likely see a funnel shape of points, where
+the error absolute value is increasing or decreasing across the x-axis.
+We don't see that here, so the assumption looks good! We can also use
 this plot to see if the model meets the assumption of linearity, or a
 linear relationship between the predictor and the response. As long as
-the residuals for the most part stick around 0, we can assume this
-assumption is met.
+the residuals for the most part stick around 0 and don't show any weird
+pattern, like a curve, we can assume this assumption is met.
 
 There are other assumptions that go beyond plots and more into how the
 model is developed. The main one is that observations are independent.
