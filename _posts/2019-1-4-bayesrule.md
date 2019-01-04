@@ -32,22 +32,22 @@ probably close to 100%). Here we start to get into joint and conditional
 probability.
 
 Conditional probability, <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>, is the probability that event *X*
-will happen, given event *Y* has happened. Think of it like, if the
+will happen, given event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> has happened. Think of it like, if the
 Warriors win the championship, what is the probability that they sign
 another superstar?
 
-Joint probability, *P*(*X*, *Y*), is the probability that event *X* and
-event *Y* happen. So this would be the probability that the Warriors win
+Joint probability, <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,Y)" title="P(X,Y)" /></a>, is the probability that event *X* and
+event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> happen. So this would be the probability that the Warriors win
 a championship and sign a superstar.
 
 In general, joint probability of two independent events (say someone
 scoring 20 points in one game and another player scoring 15 points in a
 separate game) is found by multiplying the two probabilities:
-*P*(*X*, *Y*)=*P*(*X*)\**P*(*Y*). If one of the events is dependent on
-another, the formula changes to *P*(*X*, *Y*)=*P*(*X*)\**P*(*Y*|*X*).
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y)" title="P(X, Y)=P(X)*P(Y)" /></a>. If one of the events is dependent on
+another, the formula changes to <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y|X)" title="P(X, Y)=P(X)*P(Y|X)" /></a>.
 
 With some simple algebra, the formula for the conditional probability is
-therefore $P(Y|X) = \\frac{P(X,Y)}{P(X)}$.
+therefore <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)=\frac{P(X|Y)}{P(X)})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)=\frac{P(X|Y)}{P(X)})" title="P(Y|X)=\frac{P(X|Y)}{P(X)})" /></a>.
 
 Bayes Rule
 ==========
@@ -59,16 +59,16 @@ our beliefs with new evidence.
 
 Bayes rule is another form of the conditional probability formula.
 Remember that the joint probability of two dependent events is
-*P*(*X*, *Y*)=*P*(*X*)\**P*(*Y*|*X*). Therefore, we could replace the
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y|X)" title="P(X, Y)=P(X)*P(Y|X)" /></a>. Therefore, we could replace the
 numerator in the conditional probability formula with
-*P*(*X*)\**P*(*Y*|*X*):
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)*P(Y|X)" title="P(X)*P(Y|X)" /></a>:
 
-$$P(X | Y) = \\frac{P(Y|X)P(X)}{P(Y)}$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X&space;|&space;Y)=\frac{P(Y|X)P(X)}{P(Y)}$$" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X&space;|&space;Y)=\frac{P(Y|X)P(X)}{P(Y)}$$" title="P(X | Y)=\frac{P(Y|X)P(X)}{P(Y)}$$" /></a>
 
 What the following equation states is that the conditional probability
-of *X* given *Y* is equal to the product of the conditional probability
-of *Y* given *X* and the probability of *X*, divided by the probability
-of *Y*. This is equivalent to the prior conditional probability
+of <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a> given <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> is equal to the product of the conditional probability
+of <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> given <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a> and the probability of <a href="https://www.codecogs.com/eqnedit.php?latex=X" target="_blank"><img src="https://latex.codecogs.com/gif.latex?X" title="X" /></a>, divided by the probability
+of <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a>. This is equivalent to the prior conditional probability
 equation, it just uses new info. So if you wanted to calculate the
 conditional probability, but you didn't know the joint probability, you
 could use Bayes formula instead!
@@ -78,9 +78,9 @@ know the probability of a college player being drafted given that they
 are at least 7 feet tall. We can write out what each term means in the
 equation:
 
--   *P*(*X*): Probability a player is drafted
--   *P*(*Y*): Probability a player is at least 7 ft.
--   *P*(*Y*|*X*): Probability a player is at least 7 ft. given that they
+-   <a href="https://www.codecogs.com/eqnedit.php?latex=P(X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)" title="P(X)" /></a>: Probability a player is drafted
+-   <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y)" title="P(Y)" /></a>: Probability a player is at least 7 ft.
+-   <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)" title="P(Y|X)" /></a>: Probability a player is at least 7 ft. given that they
     are drafted
 -   <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>: Probability a player is drafted given that they are at
     least 7 ft.
@@ -88,18 +88,18 @@ equation:
 Now, know that the numbers I use for this example are not based on any
 data, it's just to show an example!
 
-So let's think of *P*(*X*) first; even if you are a college player, the
+So let's think of <a href="https://www.codecogs.com/eqnedit.php?latex=P(X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)" title="P(X)" /></a> first; even if you are a college player, the
 chances of being drafted are extremely low. There are only 60 spots each
 year, and a handful of those will go to guys who didn't even play in
 college (Euroleague, G-League). Let's say the probability of being
 drafted is 1% (and even that is being generous). This is our prior
 belief; it's what we assume going into the problem.
 
-Now let's think of *P*(*Y*). This is the probability that a college
+Now let's think of <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y)" title="P(Y)" /></a>. This is the probability that a college
 player is at least 7 ft. This is pretty rare, but not as rare as being
 drafted. We'll say that the probability is 8%.
 
-Now what about *P*(*Y*|*X*)? There aren't a ton of 7 footers in the
+Now what about <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)" title="P(Y|X)" /></a>? There aren't a ton of 7 footers in the
 draft pool because of a bunch of reasons (shift to position-less
 basketball, small amount of guys talented enough, injury issues, etc.).
 Despite this, there's still a handful that get drafted... let's say
@@ -108,7 +108,7 @@ are using to update our prior belief.
 
 With all of these numbers, we can now plug them into the equation:
 
-$$P(X | Y) = \\frac{.12 \* .01}{.08}$$
+<a href="https://www.codecogs.com/eqnedit.php?latex=P(X&space;|&space;Y)&space;=&space;\frac{.12&space;*&space;.01}{.08}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X&space;|&space;Y)&space;=&space;\frac{.12&space;*&space;.01}{.08}" title="P(X | Y) = \frac{.12 * .01}{.08}" /></a>
 
 Therefore, our probability of a player getting drafted given that they
 are at least 7 ft. is `r 100*(.12*.01)/.08`%. That may not seem like a
