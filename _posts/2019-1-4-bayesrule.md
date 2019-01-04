@@ -1,3 +1,10 @@
+---
+layout: post
+title: "Bayesian Inference Pt. 1: Bayes Rule"
+date: 2019-01-04 00:00:00
+excerpt_separator: <!--more-->
+---
+
 Up until now, most of the statistical work we have looked at could fall
 under the category of frequentist statistics. We've made inferential
 conclusions about populations based on a sample of data. But we don't
@@ -6,6 +13,8 @@ we can include our own pre-conceived knowledge on the subject using
 Bayesian methods. The next couple of posts will focus on Bayesian
 methodology, allowing us to see how we can include our own prior beliefs
 in models we create.
+
+<!--more-->
 
 Quick Probability Review
 ========================
