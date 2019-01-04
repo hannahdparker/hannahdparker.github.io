@@ -31,7 +31,7 @@ of the Warriors winning the championship this year AND next year (again,
 probably close to 100%). Here we start to get into joint and conditional
 probability.
 
-Conditional probability, *P*(*X*|*Y*), is the probability that event *X*
+Conditional probability, <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>, is the probability that event *X*
 will happen, given event *Y* has happened. Think of it like, if the
 Warriors win the championship, what is the probability that they sign
 another superstar?
@@ -82,7 +82,7 @@ equation:
 -   *P*(*Y*): Probability a player is at least 7 ft.
 -   *P*(*Y*|*X*): Probability a player is at least 7 ft. given that they
     are drafted
--   *P*(*X*|*Y*): Probability a player is drafted given that they are at
+-   <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>: Probability a player is drafted given that they are at
     least 7 ft.
 
 Now, know that the numbers I use for this example are not based on any
