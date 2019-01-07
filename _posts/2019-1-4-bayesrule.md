@@ -16,8 +16,7 @@ in models we create.
 
 <!--more-->
 
-Quick Probability Review
-========================
+### Quick Probability Review ###
 
 Most people deal with probability in their day-to-day lives, whether
 you're a statistician or not. Thinking about things in a probabilistic
@@ -49,8 +48,7 @@ another, the formula changes to <a href="https://www.codecogs.com/eqnedit.php?la
 With some simple algebra, the formula for the conditional probability is
 therefore <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)=\frac{P(X,Y)}{P(X)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)=\frac{P(X,Y)}{P(X)}" title="P(Y|X)=\frac{P(X,Y)}{P(X)}" /></a>.
 
-Bayes Rule
-==========
+### Bayes Rule ###
 
 Bayesian methodologies have become extremely popular as computer power
 has improved, but its origins actually go way back to the 18th century
@@ -111,7 +109,7 @@ With all of these numbers, we can now plug them into the equation:
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(X&space;|&space;Y)&space;=&space;\frac{.12&space;*&space;.01}{.08}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X&space;|&space;Y)&space;=&space;\frac{.12&space;*&space;.01}{.08}" title="P(X | Y) = \frac{.12 * .01}{.08}" /></a>
 
 Therefore, our probability of a player getting drafted given that they
-are at least 7 ft. is `r 100*(.12*.01)/.08`%. That may not seem like a
+are at least 7 ft. is 1.5%. That may not seem like a
 huge jump, but remember how hard it is to get drafted in the first
 place! We've taken our prior belief of how likely it is for a college
 player to be drafted and updated it with new information. Now we know
