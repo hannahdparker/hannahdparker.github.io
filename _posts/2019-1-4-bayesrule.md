@@ -47,7 +47,7 @@ separate game) is found by multiplying the two probabilities:
 another, the formula changes to <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y|X)" title="P(X, Y)=P(X)*P(Y|X)" /></a>.
 
 With some simple algebra, the formula for the conditional probability is
-therefore <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)=\frac{P(X|Y)}{P(X)})" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)=\frac{P(X|Y)}{P(X)})" title="P(Y|X)=\frac{P(X|Y)}{P(X)})" /></a>.
+therefore <a href="https://www.codecogs.com/eqnedit.php?latex=P(Y|X)=\frac{P(X,Y)}{P(X)}" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(Y|X)=\frac{P(X,Y)}{P(X)}" title="P(Y|X)=\frac{P(X,Y)}{P(X)}" /></a>.
 
 Bayes Rule
 ==========
