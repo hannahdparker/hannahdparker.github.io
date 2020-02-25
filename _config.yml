@@ -21,7 +21,7 @@ footer-links:
   email: jcampbellsjci@gmail.com
   facebook:
   flickr:
-  github: jcampbellsjci/jcampbellsjci.github.io
+  github:
   instagram:
   linkedin:
   pinterest:
@@ -86,3 +86,6 @@ exclude:
   - CNAME
 
 theme: jekyll-theme-minimal
+
+paginate: 5
+paginate_path: "/page/:num/"
