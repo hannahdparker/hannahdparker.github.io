@@ -55,7 +55,7 @@ standings %>%
 ```
 
 <center>
-<img src="../../images/post5_linear-regression1/initial.PNG" id="id" class="class" width="400" height="450" />
+<img src="../images/post5_linear-regression1/initial.PNG" id="id" class="class" width="400" height="450" />
 </center>
 The blue line represents the line of best fit for this relationship (we'll get into more detail in the next section). Overall, the variables appear to have a strong linear relationship as most points do not stray very far from this line.
 
@@ -191,7 +191,7 @@ standings_output %>%
 ```
 
 <center>
-<img src="../../images/post5_linear-regression1/normality.PNG" id="id" class="class" width="400" height="450" />
+<img src="../images/post5_linear-regression1/normality.PNG" id="id" class="class" width="400" height="450" />
 </center>
 A couple of teams break from the line at the extremes, but for the most part, residuals appear normal.
 
@@ -205,7 +205,7 @@ standings_output %>%
 ```
 
 <center>
-<img src="../../images/post5_linear-regression1/convar.PNG" id="id" class="class" width="400" height="450" />
+<img src="../images/post5_linear-regression1/convar.PNG" id="id" class="class" width="400" height="450" />
 </center>
 For the constant variance assumption to be met, we should see points scattered evenly around 0 on the y-axis for all fitted values. If the assumption is not met, we'll likely see our points form a funnel shape where the absolute error is increasing or decreasing across the x-axis. We don't see that here, so the assumption looks good!
 
