@@ -1,0 +1,153 @@
+---
+layout: post
+title: "Linear Regression Pt. 1: Simple Linear Regression"
+date: 2017-6-01 00:00:00
+excerpt_separator: <!--more-->
+output:
+  md_document:
+    variant: markdown_github
+---
+
+In this post, we'll go over the basics of simple linear regression. Linear regression will be our first foray into predictive modeling. The models we've looked at in the past (t-tests, ANOVA) have focused solely on inference; although this is useful, regression will be a building block for a lot more use cases.
+
+<!--more-->
+#The Data
+
+We'll be using data from the 2015-16 standings on [Basketball Reference](http://www.basketball-reference.com/leagues/NBA_2016_standings.html). We'll be scraping this using the following code and storing the data in a tibble called `standings`. I added notes to explain what each line does.
+
+```{r, warning = F, message = F}
+library(rvest)
+library(dplyr)
+
+url <- "http://www.basketball-reference.com/leagues/NBA_2016_standings.html"
+
+standings <- url %>%
+  # Input the css selector
+  read_html('#confs_standings_E') %>%
+  html_table() %>%
+  # Results are in a list with many elements
+  # We want the first two
+  .[1:2] %>%
+  # We bind the two elements into one tibble
+  bind_rows() %>%
+  # Team names are listed under two different columns separated by conference
+  # We'll combine them under the field 'Team'
+  # We also make a new column that shows the average difference in points
+  mutate(Team = ifelse(is.na(`Eastern Conference`), `Western Conference`, 
+                       `Eastern Conference`),
+         `PDiff/G` = `PS/G` - `PA/G`) %>%
+  select(Team, W, L, `PS/G`, `PA/G`, `PDiff/G`)
+```
+
+You might notice a lot of accents around column names. Those are used on names that are not syntactically valid. These could be column names with blank spaces, punctuation, or slashes. If the accents become annoying, the `make.names` function will make column names valid.
+
+#Initial Analysis
+
+Lets take a look at the effect of `PDiff/G` on wins, `W`. `PDiff/G` is a column we created that shows the difference between a team's average points scored per game and average points scored against per game. One would expect a higher value for this difference would result in more wins.
+
+Let's start by plotting the relationship between the two using a scatter plot.
+
+```{r, eval=F}
+library(ggplot2)
+
+standings %>%
+  ggplot(aes(x = `PDiff/G`, y = W)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = F) +
+  labs(x = "Point Differential Per Game", y = "Wins")
+```
+
+<center>
+<img src="../../images/post5_linear-regression1/initial.PNG" id="id" class="class" width="400" height="450" />
+</center>
+
+The blue line represents the line of best fit for this relationship (we'll get into more detail in the next section). Overall, the variables appear to have a strong linear relationship as most points do not stray very far from this line.
+
+#Simple Linear Regression
+
+Simple linear regression involves a dependent variable (what we are trying to predict) and one independent variable. In this example, we'll try to predict how many wins a team has by their average point differential.
+
+The linear regression model is implemented with the following equation:
+$$\hat{y} = b_{0} + b_{1}x$$
+Here, $\hat{y}$ is our predicted value for the dependent variable. $b_{0}$ is our intercept term; this is what our predicted value of $y$ would be when the value of our independent variable is 0. $b_{1}$ is the slope (referred to as the coefficient) of $x$, our independent variable. For every one unit increase in $x$, our predicted value of $y$ would increase by this coefficient estimate.
+
+The linear model estimates intercept and coefficient values that represent a line of best fit. Best fit is determined by what type of regression model we are using. The most common, and what we'll be using today, is ordinary least squares (OLS). OLS determines best fit by whatever line minimizes the sum of squared residuals, or errors (differences between $y$ and $\hat{y}$)
+
+The function to create a linear regression model in `R` is `lm`. We use the same formula interface we did in previous lessons: `y ~ x`.
+
+```{r}
+standings_lm <- lm(W ~ `PDiff/G`, data = standings)
+standings_lm
+```
+
+Calling the `lm` object returns the intercept and coefficient estimate for the regression model. So for every one point increase in average point differential, we'd predict an additional `2.6` wins. Putting this in the context of our regression equation, our formula would be $W = 41.018 + (2.639 * PDiff/G)$.
+
+We can make win predictions based on the team's average point differential using the `predict` function with our model as input.
+
+```{r}
+predict(standings_lm)
+```
+
+We can see additional model information by calling `summary` on our model object.
+
+```{r}
+summary(standings_lm)
+```
+
+The first thing we see is the distribution of residuals. Again, this is the difference between the actual value of the response and its predicted value.
+
+Next, we get our coefficient table. This stores our coefficient estimates and their p-values. The associated null hypothesis is that our coefficient estimate is equal to `0`; so in the case of `PDiff/G`, because the p-value is less than `.05`, we reject the null and say that the coefficient estimate is significantly different from `0`. We also have `Std. Error` and `t value` columns. The standard error represents the variability of the coefficient estimate while the t-value is a standardized way of looking at the coefficient estimate (coefficient estimate / standard error) and is what the p-value is based off of.
+
+We can also gauge how well the model performs in this `summary` output. The most straightforward way is by looking at the R-squared value. This is a number between 0 and 1 that shows how much variance in the response variable is explained by the model. R-squared values closer to `1` indicate the model explains most of the variance in `y` and is a strong model. What determines a good R-squared value isn't universal and can change based on the topic. In some spaces, a value of `.6` might be great while others might call it fairly weak. It all depends on the situation, but in general larger is better. The multiple R-squared is what we want to focus on in simple linear regression; average point differential accounts for about `96%` of the variance in wins, indicating that our model is very strong.
+
+This output is really helpful, but it's not in a very clean and easy to manipulate format. We can use several functions from the `broom` package to put this output into tidy format.
+
+`tidy` puts our coefficient table into a tibble. `glance` puts several different pieces of model output into a tibble. `augment` combines several pieces of model information, such as predictions and residuals, with our response and predictor values.
+
+```{r, warning = F}
+library(broom)
+
+tidy(standings_lm)
+glance(standings_lm)
+augment(standings_lm)
+```
+
+Of course, being a parametric model, there are also assumptions that come with linear regression. The first one is the *normality* assumption seen in previous tutorials. Specifically, we want to see normality of residuals. We'll take a look at this using a QQ plot.
+
+```{r}
+standings_output <- augment(standings_lm)
+```
+```{r, eval=F}
+standings_output %>%
+  ggplot(aes(sample = .resid)) +
+  geom_qq() +
+  geom_qq_line()
+```
+<center>
+<img src="../../images/post5_linear-regression1/normality.PNG" id="id" class="class" width="400" height="450" />
+</center>
+
+A couple of teams break from the line at the extremes, but for the most part, residuals appear normal.
+
+Our next assumption is *constant variance* of residuals. We want the spread of our residuals to be similar across all predicted values. To check this, we plot the predicted values against the residuals in a scatter plot, like so:
+
+```{r, eval = F}
+standings_output %>%
+  ggplot(aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0)
+```
+
+<center>
+<img src="../../images/post5_linear-regression1/convar.PNG" id="id" class="class" width="400" height="450" />
+</center>
+
+For the constant variance assumption to be met, we should see points  scattered evenly around 0 on the y-axis for all fitted values. If the assumption is not met, we'll likely see our points form a funnel shape where the absolute error is increasing or decreasing across the x-axis. We don't see that here, so the assumption looks good!
+
+We can also use this plot to see if the model meets the assumption of *linearity*: that there is a linear relationship between the predictor and the response. As long as the residuals appear randomly distributed and don't show any weird pattern, such as a curve, we can assume this assumption is met (and in this case, I say we meet it!).
+
+Another assumption that goes beyond plots and more into how the model is developed that of *independent observations*. This essentially means that each observation isn't influenced by other observations. An example where we could break from this is if you had a model which included separate points for team records before and after the all-star break. One would assume that a team's record and stats prior to the all-star break influences their record and stats after the break.
+
+### To Be Continued ###
+
+With simple linear regression under our belt, we can now make a basic predictive model. In the next tutorial, I'll go over multiple linear regression, or regression with more than one predictor; from there we can really build into even more advanced modeling techniques!

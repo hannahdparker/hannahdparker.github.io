@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 ---
 
 <center>
-![](../images/pg.jpg){#id .class width=650 height=400}
+![](../../images/post1_welcome/pg.jpg){#id .class width=650 height=400}
 </center>
 
 # Welcome

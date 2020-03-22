@@ -7,7 +7,7 @@ The Data
 The example we're going to use is pretty arbitrary, but is easy to understand. We're going to use ANOVA to find out if there is a significant difference in the mean height of players in each Eastern Conference division. Let's start by using our [data scraping skills](https://jcampbellsjci.github.io/gettingdata/) to get information from the stats.nba website (remember, this site has its data in JSON format!).
 
 <center>
-<img src="../images/Manute-Bol-Muggsy-Bogues.jpg" id="id" class="class" width="350" height="450" />
+<img src="../../images/post4_anova/Manute-Bol-Muggsy-Bogues.jpg" id="id" class="class" width="350" height="450" />
 </center>
 We'll first bring up the `httr` and `rjson` packages to scrape the data. We'll also be using `purrr` to do some looping.
 
@@ -106,7 +106,7 @@ heights %>%
 ```
 
 <center>
-<img src="../images/boxdiv.png" id="id" class="class" width="450" height="400" />
+<img src="../../images/boxdiv.png" id="id" class="class" width="450" height="400" />
 </center>
 It looks like there isn't a huge difference in distribution of player height between each division, but let's check it out with an ANOVA test.
 

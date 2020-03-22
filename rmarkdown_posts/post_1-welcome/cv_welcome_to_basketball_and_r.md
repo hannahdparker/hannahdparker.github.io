@@ -1,12 +1,5 @@
----
-layout: post
-title: "Welcome to Basketball and R"
-date: 2017-3-23 00:00:00
-excerpt_separator: <!--more-->
----
-
 <center>
-<img src="/images/pg.jpg" id="id" class="class" width="650" height="400" />
+<img src="../../images/post1_welcome/pg.jpg" id="id" class="class" width="650" height="400" />
 </center>
 Welcome
 =======

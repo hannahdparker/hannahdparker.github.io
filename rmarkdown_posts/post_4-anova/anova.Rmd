@@ -14,7 +14,7 @@ In the last post, I went over using t-tests to compare means between two groups.
 The example we're going to use is pretty arbitrary, but is easy to understand. We're going to use ANOVA to find out if there is a significant difference in the mean height of players in each Eastern Conference division. Let's start by using our [data scraping skills](https://jcampbellsjci.github.io/gettingdata/) to get information from the stats.nba website (remember, this site has its data in JSON format!).
 
 <center>
-![](../images/Manute-Bol-Muggsy-Bogues.jpg){#id .class width=350 height=450}
+![](../../images/post4_anova/Manute-Bol-Muggsy-Bogues.jpg){#id .class width=350 height=450}
 </center>
 
 We'll first bring up the `httr` and `rjson` packages to scrape the data. We'll also be using `purrr` to do some looping.
@@ -108,7 +108,7 @@ heights %>%
 ```
 
 <center>
-![](../images/boxdiv.png){#id .class width=450 height=400}
+![](../../images/post4_anova/boxdiv.png){#id .class width=450 height=400}
 </center>
 
 It looks like there isn't a huge difference in distribution of player height between each division, but let's check it out with an ANOVA test.
@@ -139,7 +139,7 @@ tibble(residuals = div_anova$residuals) %>%
 ```
 
 <center>
-![](../images/qq_anova1.png){#id .class width=450 height=400}
+![](../../images/post4_anova/qq_anova1.png){#id .class width=450 height=400}
 </center>
 
 Unfortunately, `anova()` just gives us info on whether there is a significant difference in the means or not; we don't know how the factor levels differ with each other. For this, we'll need to use a multiple comparison test; one of the most popular is the Tukey Honest Significance Test.
@@ -193,7 +193,7 @@ tibble(residuals = div_po_anova$residuals) %>%
 ```
 
 <center>
-![](../images/qq_anova2.png){#id .class width=450 height=400}
+![](../../images/post4_anova/qq_anova2.png){#id .class width=450 height=400}
 </center>
 
 We can see some slight straying from normality towards the upper tail, but nothing that should have us too worried.
