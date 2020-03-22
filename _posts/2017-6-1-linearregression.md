@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "One and Two-Way Anova"
+title: "Linear Regression Part 1: Simple Linear Regression"
 date: 2017-6-01 00:00:00
 excerpt_separator: <!--more-->
 ---
