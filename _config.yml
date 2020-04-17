@@ -87,5 +87,8 @@ exclude:
 
 theme: jekyll-theme-minimal
 
+gems:
+  - jekyll-paginate
+
 paginate: 5
 paginate_path: "/page/:num/"
