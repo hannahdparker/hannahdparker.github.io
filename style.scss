@@ -25,7 +25,7 @@ body {
 
 .container {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 0 10px;
   width: 100%;
 }
@@ -161,6 +161,15 @@ img {
   @include mobile {
     text-align: center;
   }
+}
+
+div.left {
+    width: 200px;
+    float: left;
+}
+
+div.right {
+    margin-left: 220px;
 }
 
 .site-avatar {

@@ -35,7 +35,14 @@
     </div>
 
     <div id="main" role="main" class="container">
-      {{ content }}
+          
+      <div class="left">
+        {% include _author-bio.html %}
+      </div>
+      
+      <div class="right">
+        {{ content }}
+      </div>
     </div>
 
     <div class="wrapper-footer">
