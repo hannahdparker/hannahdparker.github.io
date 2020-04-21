@@ -9,6 +9,28 @@
 @import "variables";
 // Syntax highlighting @import is at the bottom of this file
 
+$doc-font-size: 16;
+
+@mixin font-rem($size) {
+  font-size: 0px + $size;
+  font-size: 0rem + $size / $doc-font-size;
+}
+
+@mixin scale($ratio) {
+-webkit-transform : scale($ratio);
+-moz-transform : scale($ratio);
+-ms-transform : scale($ratio);
+-o-transform : scale($ratio);
+transform : scale($ratio); }
+
+@mixin translate($x: 0, $y: 0) {
+-webkit-transform : translate($x, $y);
+-moz-transform : translate($x, $y);
+-ms-transform : translate($x, $y);
+-o-transform : translate($x, $y);
+transform : translate($x, $y); }
+
+
 /**************/
 /* BASE RULES */
 /**************/
@@ -110,6 +132,7 @@ img {
   max-width: 100%;
 }
 
+
 // Fixes images in popup boxes from Google Translate
 .gmnoprint img {
   max-width: none;
@@ -187,6 +210,50 @@ div.right {
   img {
     border-radius: 15px;
   }
+}
+
+.bio-photo {
+    max-width: 110px;
+		border-radius: 35%;
+}
+
+.author-social-1 {
+  display: block;
+  margin-bottom: 5px;
+  font-style: italic;
+  @include font-rem(20);
+  color: $black;
+  &:visited {
+    color: $black;
+  }
+  &:hover {
+    @include scale(1.1);
+  }
+  &:active {
+    @include translate(0, 2px);
+  }
+  .fa {
+		margin-right: 5px;
+	}
+}
+
+.author-social-2 {
+  display: block;
+  margin-bottom: 5px;
+  @include font-rem(18);
+  color: $black;
+  &:visited {
+    color: $black;
+  }
+  &:hover {
+    @include scale(1.1);
+  }
+  &:active {
+    @include translate(0, 2px);
+  }
+  .fa {
+		margin-right: 5px;
+	}
 }
 
 .site-info {
@@ -291,6 +358,8 @@ footer {
   padding: 20px 0;
   text-align: center;
 }
+
+
 
 // Settled on moving the import of syntax highlighting to the bottom of the CSS
 // ... Otherwise it really bloats up the top of the CSS file and makes it difficult to find the start
