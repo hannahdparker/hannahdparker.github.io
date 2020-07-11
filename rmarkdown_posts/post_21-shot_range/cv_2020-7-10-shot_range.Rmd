@@ -72,14 +72,13 @@ Now, you might be wondering why I'm getting so hung up on mid-range shots and no
 
 The following table shows the percentage of points each team scores from each area. We can sort this table to see leaders in each area.
 
-```{r, echo=F}
-DT::datatable(team_pts_by_location,
-              options = list(dom = 't', pageLength = 30),
-              rownames = F,
-              colnames = c("team", "restricted_area", "in_the_paint",
-                           "mid_range", "left_corner_three",
-                           "right_corner_three", "above_the_break_three",
-                           "free_throw"))
+```{r, echo=F, warning=F}
+library(knitr)
+kable(team_pts_by_location, 
+      col.names = c("team", "restricted_area", "in_the_paint",
+                    "mid_range", "left_corner_three",
+                    "right_corner_three", "above_the_break_three",
+                    "free_throw"))
 ```
 
 Focusing on mid-range shots, we can see that the Spurs are far and away the team that depends on them the most. This may seem like a surprise since the Spurs have this aura of being a modern team in terms of style. However, considering their star players are DeMar DeRozan and LaMarcus Aldridge, the results make a bit more sense.
@@ -88,15 +87,7 @@ It's also interesting to see the teams that have the lowest percentage of points
 
 # By Player
 
-After looking at changes by team, let's look at changes by players. The following table shows the changes in PPG for each player.
-
-```{r, echo=F}
-DT::datatable(new_values_player,
-              options = list(dom = 'ftp', pageLength = 10),
-              rownames = F,
-              colnames = c("player", "team", "ppg", "adjusted_ppg",
-                           "ppg_increase", "ppg_percent_increase"))
-```
+After looking at changes by team, let's look at how this change would effect the average points scored by different players. We'll look at some subsets of players here, but the changes in PPG for every player can be found [here](https://github.com/jcampbellsjci/jcampbellsjci.github.io/blob/master/data/post21_shot-range/player_new_values.csv).
 
 The following plot shows the players with the largest percent increase in PPG from this value change:
 
