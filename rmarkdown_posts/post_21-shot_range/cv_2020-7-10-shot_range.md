@@ -1,3 +1,10 @@
+---
+layout: post
+title: "The Value of a Shot"
+date: 2020-07-04 00:00:00
+excerpt_separator: <!--more-->
+---
+
 It's not news to anyone that the NBA has shifted in style dramatically over the past decade. A game once played in the post has extended to the three point line for an obvious reason... three is greater than two.
 
 <!--more-->
@@ -48,38 +55,7 @@ By Team
 
 The following table shows the percentage of points each team scores from each area. We can sort this table to see leaders in each area.
 
-| team |  restricted\_area|  in\_the\_paint|  mid\_range|  left\_corner\_three|  right\_corner\_three|  above\_the\_break\_three|  free\_throw|
-|:-----|-----------------:|---------------:|-----------:|--------------------:|---------------------:|-------------------------:|------------:|
-| ATL  |            0.3481|          0.1208|      0.0591|               0.0293|                0.0289|                    0.2425|       0.1713|
-| BKN  |            0.3647|          0.0824|      0.0419|               0.0447|                0.0426|                    0.2624|       0.1616|
-| BOS  |            0.3189|          0.1056|      0.0843|               0.0402|                0.0236|                    0.2655|       0.1618|
-| CHA  |            0.3552|          0.1006|      0.0402|               0.0429|                0.0344|                    0.2692|       0.1575|
-| CHI  |            0.3724|          0.0907|      0.0498|               0.0553|                0.0333|                    0.2536|       0.1449|
-| CLE  |            0.3737|          0.1326|      0.0804|               0.0325|                0.0313|                    0.2056|       0.1442|
-| DAL  |            0.3027|          0.0989|      0.0683|               0.0393|                0.0511|                    0.2880|       0.1516|
-| DEN  |            0.3397|          0.1162|      0.1087|               0.0425|                0.0339|                    0.2135|       0.1456|
-| DET  |            0.3008|          0.1048|      0.0704|               0.0652|                0.0594|                    0.2438|       0.1551|
-| GSW  |            0.3433|          0.1146|      0.0941|               0.0374|                0.0221|                    0.2136|       0.1749|
-| HOU  |            0.2956|          0.0629|      0.0416|               0.0544|                0.0590|                    0.3107|       0.1758|
-| IND  |            0.3408|          0.1112|      0.1368|               0.0405|                0.0333|                    0.1997|       0.1378|
-| LAC  |            0.2762|          0.1132|      0.1028|               0.0452|                0.0366|                    0.2423|       0.1838|
-| LAL  |            0.3839|          0.0774|      0.0904|               0.0517|                0.0402|                    0.2048|       0.1515|
-| MEM  |            0.3446|          0.1704|      0.0673|               0.0328|                0.0324|                    0.2082|       0.1449|
-| MIA  |            0.2855|          0.0940|      0.0721|               0.0488|                0.0438|                    0.2840|       0.1737|
-| MIL  |            0.3276|          0.0910|      0.0794|               0.0452|                0.0396|                    0.2665|       0.1508|
-| MIN  |            0.3072|          0.0776|      0.0722|               0.0398|                0.0358|                    0.3107|       0.1563|
-| NOP  |            0.3468|          0.0786|      0.0687|               0.0448|                0.0525|                    0.2637|       0.1457|
-| NYK  |            0.4042|          0.0985|      0.0995|               0.0341|                0.0327|                    0.1848|       0.1461|
-| OKC  |            0.3005|          0.1196|      0.1193|               0.0317|                0.0262|                    0.2234|       0.1787|
-| ORL  |            0.3153|          0.1117|      0.0980|               0.0421|                0.0198|                    0.2538|       0.1593|
-| PHI  |            0.2983|          0.1150|      0.1167|               0.0372|                0.0332|                    0.2422|       0.1574|
-| PHX  |            0.3222|          0.1004|      0.1042|               0.0369|                0.0386|                    0.2223|       0.1763|
-| POR  |            0.2956|          0.0938|      0.1247|               0.0340|                0.0349|                    0.2644|       0.1526|
-| SAC  |            0.3278|          0.1196|      0.0803|               0.0477|                0.0376|                    0.2433|       0.1435|
-| SAS  |            0.2618|          0.1206|      0.1733|               0.0347|                0.0304|                    0.2173|       0.1618|
-| TOR  |            0.3470|          0.0726|      0.0559|               0.0469|                0.0420|                    0.2763|       0.1605|
-| UTA  |            0.3059|          0.1235|      0.0556|               0.0495|                0.0553|                    0.2517|       0.1582|
-| WAS  |            0.3140|          0.0825|      0.1100|               0.0317|                0.0249|                    0.2670|       0.1695|
+![](cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 Focusing on mid-range shots, we can see that the Spurs are far and away the team that depends on them the most. This may seem like a surprise since the Spurs have this aura of being a modern team in terms of style. However, considering their star players are DeMar DeRozan and LaMarcus Aldridge, the results make a bit more sense.
 
