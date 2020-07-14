@@ -56,7 +56,7 @@ By Team
 The following table shows the percentage of points each team scores from each area. We can sort this table to see leaders in each area.
 
 <center>
-<img src="../../images/post21_shot-range/cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png" id="id" class="class" width="800" height="1000" />
+<img src="../../images/post21_shot-range/cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png" id="id" class="class" width="1000" height="1000" />
 </center>
 
 Focusing on mid-range shots, we can see that the Spurs are far and away the team that depends on them the most. This may seem like a surprise since the Spurs have this aura of being a modern team in terms of style. However, considering their star players are DeMar DeRozan and LaMarcus Aldridge, the results make a bit more sense.
