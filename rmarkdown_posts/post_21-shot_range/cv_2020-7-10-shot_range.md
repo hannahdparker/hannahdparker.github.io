@@ -53,7 +53,7 @@ Now, you might be wondering why I'm getting so hung up on mid-range shots and no
 By Team
 =======
 
-The following table shows the percentage of points each team scores from each area. We can sort this table to see leaders in each area.
+The following table shows the percentage of points each team scores from each area.
 
 ![](cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
