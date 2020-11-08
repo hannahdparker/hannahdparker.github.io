@@ -1,3 +1,7 @@
+Using Scouting Reports to Find Similar Draft Prospects
+================
+2020-05-18 00:00:00
+
 Most of the posts we've explored here have been focused on structured data. This data is organized in a way in which we can perform analysis easily, like the stats page for a player on NBA.com. That's the great thing about doing experiments with a sport like basketball: there are a ton of sources for clean, structured data.
 
 In this project, I wanted to change it up a bit. Rather than looking at data in a structured format, I went the unstructured route, specifically looking at text data. I wanted to see if we could take scouting reports of draft prospects, and compare them to historic scouting reports, allowing us to make comparisons between players. There are a lot of difficulties that come with attacking unstructured data, but it could allow us to come to better conclusions about players.
@@ -31,9 +35,9 @@ To find the most similar players based on an unstructured data source like scout
 
 Using word counts may be too simple, though. If the word "athletic" shows up a lot in a scouting report, is it because the player is really athletic, or because they aren't athletic at all?
 
-Rather than use word count, I used a method called [Global Vectors](https://nlp.stanford.edu/projects/glove/), or GloVe. GloVe will look at different length windows of text in the scouting reports and see what words co-occur with each other. This methodology captures a bit more semantic context than something like word counts.
+Rather than use word count, I used a method called [Global Vectors](https://nlp.stanford.edu/projects/glove/), or GloVe. GloVe will look at text windows of a given length within the scouting reports and see what words co-occur with each other. This methodology captures a bit more semantic context than something like word counts.
 
-Text was input into the GloVe model giving each word in a player's scouting report a numeric vector representation of a certain length. All of the word vectors for a given player were then averaged into one vector.
+Text was cleaned and input into the GloVe model giving each word in a player's scouting report. The output of the GloVe model is a matrix where each row represents a numeric vector for a given word in the text input. To summarize all of the words in a player's scouting report, the word vectors for a given player were averaged into one vector.
 
 With each player having a numeric representation of their scouting report, we can now easily calculate similarity between different players' scouting reports.
 
