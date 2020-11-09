@@ -1,6 +1,9 @@
-Using Scouting Reports to Find Similar Draft Prospects
-================
-2020-05-18 00:00:00
+---
+layout: post
+title: "Using Scouting Reports to Find Similar Draft Prospects"
+date: 2020-05-18 00:00:00
+excerpt_separator: <!--more-->
+---
 
 Most of the posts we've explored here have been focused on structured data. This data is organized in a way in which we can perform analysis easily, like the stats page for a player on NBA.com. That's the great thing about doing experiments with a sport like basketball: there are a ton of sources for clean, structured data.
 
