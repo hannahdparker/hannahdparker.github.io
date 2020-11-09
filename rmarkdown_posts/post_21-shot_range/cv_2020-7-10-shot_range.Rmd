@@ -1,11 +1,9 @@
 ---
 layout: post
 title: "The Value of a Shot"
-date: 2020-07-04 00:00:00
+date: 2020-07-10 00:00:00
 excerpt_separator: <!--more-->
-output:
-  md_document:
-    variant: markdown_github
+output: rmarkdown::github_document
 ---
 
 ```{r, echo=F, warning=F, message=F}

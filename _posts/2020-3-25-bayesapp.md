@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Bayesian Estimation of Shot Results: The App"
-date: 2020-3-25 00:00:00
+title: "Bayesian Estimation of Shot Results"
+date: 2020-03-25 00:00:00
 excerpt_separator: <!--more-->
 ---
 
@@ -10,7 +10,9 @@ The last time we left off, I talked a bit about using empiracle Bayesian estimat
 I decided to expand a bit on those posts and set up a larger project in the same vein. In this post, I'll be going over that project, the Bayesian inference shot dashboard `(triumphant horns playing in the distance)`.
 
 <!--more-->
-### Recap ###
+
+Recap
+=====
 
 So a quick general recap on what makes Bayesian inference useful and unique in comparison to frequentist statistics. Bayesian methodology takes prior beliefs into account. This allows you to go beyond the frequentist method of basing your conclusions on the sample of data you have, and input your prior knowledge and domain expertise into the equation. You combine the data (likelihood) and your prior, and you get a posterior estimate.
 
@@ -18,7 +20,8 @@ However, we don't need to create priors by just saying, "I think this player has
 
 In my last post, I went into the idea of empirical Bayesian inference which bases our prior on actual data rather than just a belief.
 
-### Project Overview ###
+Project Overview
+================
 
 So what exactly did I do with this project?
 
@@ -35,13 +38,14 @@ And performed Bayesian inference to create a posterior estimate for each categor
 I put all of this into an interactive shiny dashboard that allows the user to select game dates, teams, players, and priors to estimate what the probability a player's next shot is a make. Here's what a single example would look like:
 
 <center>
-<img src="../images/post19_bayes-dashboard/bayes_app_screenshot.PNG" id="id" class="class" width="800" height="400" />
+<img src="../../images/post19_bayes-dashboard/bayes_app_screenshot.PNG" id="id" class="class" width="800" height="400" />
 </center>
 The intended use for this dashboard is for it to be used live, while a game is going on. You can view it anytime, but the point is for you to estimate how likely a player's next shot is going to go in during the current game.
 
 Let me paint a scenario that this dashboard may help with: you're team is up 3 against the Pistons. Andre Drummond gets the ball in the post, spins, makes a shot and gets fouled. All he has to do to tie the game is hit a foul shot. Historically, Drummond is not a great free throw shooter, but he has gone `8/8` from the line tonight. This dashboard will take that data from tonight, combine it with Drummond's past `x` games at the free throw line, and give a posterior distribution of probabilities as to what the chances are that he makes this game tying free throw.
 
-### How it Works ###
+How it Works
+============
 
 The math behind everything isn't anything new; you can check out the previous blog posts to see what goes into actually creating the numbers.
 
@@ -49,7 +53,8 @@ Historic game logs to get the priors are pulled from basketball reference. This 
 
 Live data is pulled from nba.com. This stuff gets updated every time you make a new selection, so no need to reload the whole app to keep up with new data.
 
-### How You Can Access It ###
+How You Can Access It
+=====================
 
 So I don't have a dedicated server that this app can run on, and have had difficulty getting it to run on shinyapps.io, so that made making it public a bit harder.
 
@@ -61,7 +66,8 @@ docker run --rm -p 80:80 jcampbellsjci/bayes_app
 
 This runs the app on port 80 on your local machine. You can go into a browser and type in `localhost:80` and it will take you to the app!
 
-### Conclusion ###
+Conclusion
+==========
 
 As I've sort of indicated in some parts of this post, this is an evolving project. We have a good base now, but I might make some changes in the future that I'll try and make note of here.
 

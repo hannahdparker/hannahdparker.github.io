@@ -3,9 +3,7 @@ layout: post
 title: "Bayesian Estimation of Shot Results"
 date: 2020-03-25 00:00:00
 excerpt_separator: <!--more-->
-output:
-  md_document:
-    variant: markdown_github
+output: rmarkdown::github_document
 ---
 
 The last time we left off, I talked a bit about using empiracle Bayesian estimation to perform inference. We were able to predict the probability of Steph Curry making a shot based on both his historical stats and his current game performance.

@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "The Value of a Shot"
-date: 2020-07-04 00:00:00
+date: 2020-07-10 00:00:00
 excerpt_separator: <!--more-->
 ---
 
 It's not news to anyone that the NBA has shifted in style dramatically over the past decade. A game once played in the post has extended to the three point line for an obvious reason... three is greater than two.
 
 <!--more-->
+
 Despite an increase in action and scoring, there seems to be a growing discontent with the over-reliance on three point shooting. I'm not one to long for the days of an uncoordinted seven footer backing down in the post for twenty seconds before clanging a hook shot off the rim. However, variety is the spice of life, and people will get tired and tune out from a game focused solely on one type of shot.
 
 There have been a lot of interesting ideas brought up to tackle this issue, but the one we'll focus on is changing shot value. There wasn't anything special about the distance the league chose to mark the three point line, but it's impacted what we call a good and bad shot. Why should a three pointer be worth `33%` more than a mid range jump shot from a similar distance.
@@ -54,6 +55,9 @@ By Team
 =======
 
 The following table shows the percentage of points each team scores from each area.
+
+    ## This version of Shiny is designed to work with 'htmlwidgets' >= 1.5.
+    ##     Please upgrade via install.packages('htmlwidgets').
 
 ![](cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
