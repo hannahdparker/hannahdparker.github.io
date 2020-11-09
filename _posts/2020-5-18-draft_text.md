@@ -10,6 +10,7 @@ Most of the posts we've explored here have been focused on structured data. This
 In this project, I wanted to change it up a bit. Rather than looking at data in a structured format, I went the unstructured route, specifically looking at text data. I wanted to see if we could take scouting reports of draft prospects, and compare them to historic scouting reports, allowing us to make comparisons between players. There are a lot of difficulties that come with attacking unstructured data, but it could allow us to come to better conclusions about players.
 
 <!--more-->
+
 The Data
 ========
 
