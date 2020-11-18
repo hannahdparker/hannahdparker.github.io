@@ -1,10 +1,13 @@
+Scraping Data
+================
+2017-3-23
+
 You're interested in doing some data analysis, that's clear. Unfortunately you're missing something important... Data! There's plenty of sources of NBA data, and luckily for us, most of it's in a very structured format.
 
 <!--more-->
 In this post, I'm going to show you how to get data from a couple of different sources. The focus is going to be on scraping your own data from websites. You may be used to copying and pasting data into a spreadsheet or downloading it in `CSV` form. While this method is straightforward, when trying to collect large amounts of data this method can be very cumbersome.
 
-Scraping a Basic HTML Table
-===========================
+# Scraping a Basic HTML Table
 
 The first example we're going to go over is scraping standings from `Basketball-Reference`. The standings are in a basic HTML format. We'll be using the `dplyr` and `rvest` packages throughout this post, so let's load them up now.
 
@@ -40,14 +43,14 @@ str(ec_standings)
 ```
 
     ## 'data.frame':    15 obs. of  8 variables:
-    ##  $ Eastern Conference: chr  "Milwaukee BucksÂ (1)" "Toronto RaptorsÂ (2)" "Boston CelticsÂ (3)" "Miami HeatÂ (4)" ...
-    ##  $ W                 : int  48 41 39 36 35 33 26 24 20 19 ...
-    ##  $ L                 : int  8 15 16 20 22 23 29 32 34 37 ...
-    ##  $ W/L%              : num  0.857 0.732 0.709 0.643 0.614 0.589 0.473 0.429 0.37 0.339 ...
-    ##  $ GB                : chr  "â€”" "7.0" "8.5" "12.0" ...
-    ##  $ PS/G              : num  120 113 113 112 108 ...
-    ##  $ PA/G              : num  107 106 106 109 106 ...
-    ##  $ SRS               : num  11.15 5.84 6.06 2.82 2.52 ...
+    ##  $ Eastern Conference: chr  "Milwaukee Bucks*" "Toronto Raptors*" "Boston Celtics*" "Indiana Pacers*" ...
+    ##  $ W                 : int  56 53 48 45 44 43 35 33 23 25 ...
+    ##  $ L                 : int  17 19 24 28 29 30 37 40 42 47 ...
+    ##  $ W/L%              : num  0.767 0.736 0.667 0.616 0.603 0.589 0.486 0.452 0.354 0.347 ...
+    ##  $ GB                : chr  "—" "2.5" "7.5" "11.0" ...
+    ##  $ PS/G              : num  119 113 114 109 112 ...
+    ##  $ PA/G              : num  109 106 107 108 109 ...
+    ##  $ SRS               : num  9.41 5.97 5.83 1.63 2.59 2.25 -1.01 -0.93 -7.03 -5.24 ...
 
 We may want to clean this up a little. Two things we'll do is remove the standing placement next to the team names (we'll also rename this column to something more general) and fix this `GB` (games back) column to be numeric.
 
@@ -63,14 +66,13 @@ ec_standings <- ec_standings %>%
 
 Now we have a beautiful tibble to play around with!
 
-HTML Scraping Continued
-=======================
+# HTML Scraping Continued
 
 Next, I want to go over an example that's a bit more difficult. The focus on this section is more about dealing with basktball reference rather than the scraping itself, but it's a website you'll probably use a lot if you want to analyze NBA stats, so I think it's important to go over.
 
 Basketball Reference makes their data easy to download, so if you just want one specific table it may be easier to just go to the website and download a `CSV`. However, we're going to go over an example which scrapes multiple tables.
 
-The tables on Basketball Reference are in HTML format and some are easy to scrape; however, some tables are hidden inside comments, which make them difficult to deal with. We're going to work with a case where we have to get these hidden tables.
+The tables on Basketball Reference are in HTML format and some are easy to scrape; however, some tables are hidden inside comments, which make them difficult to deal with.
 
 In this example we're going to scrape the Indiana Pacers' advanced stats for the past three seasons. An example of one of the tables we're gonna scrape is found [here](http://www.basketball-reference.com/teams/IND/2018.html). We're going to start by creating a list of urls for each of the three seasons. Then, we'll loop through them and paste each respective season into the Indiana Pacers' team url and store it in an object called `pacer_urls`.
 
@@ -82,17 +84,11 @@ pacer_urls <- map(2018:2020,
                            .x, ".html"))
 ```
 
-Now we're going to scrape the tables. We're going to apply a scraping function to each of the urls and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of these seasons. We use the same method explained in the last section of identifying the css selector, in this case it's `#advanced`. Before we scrape the data, we have to parse the comments, but once the comments are parsed, the tables are easily scraped.
+Now we're going to scrape the tables. We're going to apply a scraping function to each of the urls and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of these seasons. We use the same method explained in the last section of identifying the css selector, in this case it's `#advanced`.
 
 ``` r
 adv_pacers <- map(pacer_urls,
                   ~ read_html(.x) %>%
-                    # Code to parse the comments
-                    html_nodes(xpath='//comment()') %>%
-                    html_text() %>%
-                    paste(collapse='') %>%
-                    # Now go about the usual scraping
-                    read_html() %>%
                     html_node('#advanced') %>%
                     html_table())
 ```
@@ -104,39 +100,51 @@ map(adv_pacers, ~ head(.x, 3))
 ```
 
     ## [[1]]
-    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB%
-    ## 1  1   Thaddeus Young  29 81 2607 14.8 0.528 0.209 0.106  8.0 14.1 11.1
-    ## 2  2   Victor Oladipo  25 75 2552 23.1 0.577 0.323 0.274  2.1 15.1  8.6
-    ## 3  3 Bojan Bogdanovic  28 80 2464 13.9 0.605 0.453 0.241  1.4 10.9  6.2
-    ##   AST% STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM  BPM VORP
-    ## 1  8.5  2.6  1.2 10.4 17.3 NA 2.3 3.2 5.5 0.101 NA  0.1  1.4  1.5  2.3
-    ## 2 21.2  3.5  2.0 12.7 30.1 NA 4.3 4.0 8.2 0.155 NA  3.6  1.3  4.9  4.5
-    ## 3  7.1  1.1  0.3 10.1 19.0 NA 3.8 1.6 5.4 0.105 NA  1.1 -1.9 -0.7  0.8
+    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB% AST%
+    ## 1  1   Thaddeus Young  29 81 2607 14.8 0.528 0.209 0.106  8.0 14.1 11.1  8.5
+    ## 2  2   Victor Oladipo  25 75 2552 23.1 0.577 0.323 0.274  2.1 15.1  8.6 21.2
+    ## 3  3 Bojan Bogdanovic  28 80 2464 13.9 0.605 0.453 0.241  1.4 10.9  6.2  7.1
+    ##   STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM  BPM VORP
+    ## 1  2.6  1.2 10.4 17.3 NA 2.3 3.2 5.5 0.101 NA -0.2  0.4  0.2  1.4
+    ## 2  3.5  2.0 12.7 30.1 NA 4.3 4.0 8.2 0.155 NA  4.1  1.7  5.8  5.0
+    ## 3  1.1  0.3 10.1 19.0 NA 3.8 1.6 5.4 0.105 NA  0.5 -1.2 -0.7  0.8
     ## 
     ## [[2]]
-    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB%
-    ## 1  1 Bojan Bogdanovic  29 81 2573 16.1 0.613 0.367 0.290  1.5 12.7  7.2
-    ## 2  2   Thaddeus Young  30 81 2489 16.2 0.569 0.174 0.161  8.7 14.4 11.7
-    ## 3  3  Darren Collison  31 76 2143 16.7 0.574 0.294 0.288  1.9  9.9  6.0
-    ##   AST% STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM BPM VORP
-    ## 1  9.5  1.3  0.0 10.2 22.4 NA 3.9 2.8 6.8 0.126 NA  1.4 -1.4 0.0  1.3
-    ## 2 12.0  2.4  1.3 12.0 18.0 NA 3.0 3.9 6.9 0.133 NA  0.8  2.1 2.9  3.1
-    ## 3 29.9  2.5  0.4 14.4 17.7 NA 3.9 2.9 6.8 0.153 NA  1.2  0.0 1.2  1.8
+    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB% AST%
+    ## 1  1 Bojan Bogdanovic  29 81 2573 16.1 0.613 0.367 0.290  1.5 12.7  7.2  9.5
+    ## 2  2   Thaddeus Young  30 81 2489 16.2 0.569 0.174 0.161  8.7 14.4 11.7 12.0
+    ## 3  3  Darren Collison  31 76 2143 16.7 0.574 0.294 0.288  1.9  9.9  6.0 29.9
+    ##   STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM BPM VORP
+    ## 1  1.3  0.0 10.2 22.4 NA 3.9 2.8 6.8 0.126 NA  1.3 -0.6 0.7  1.7
+    ## 2  2.4  1.3 12.0 18.0 NA 3.0 3.9 6.9 0.133 NA  0.4  1.1 1.5  2.2
+    ## 3  2.5  0.4 14.4 17.7 NA 3.9 2.9 6.8 0.153 NA  0.8  1.0 1.8  2.1
     ## 
     ## [[3]]
-    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB%
-    ## 1  1 Domantas Sabonis  23 53 1836 20.7 0.587 0.081 0.356  9.8 30.0 19.9
-    ## 2  2      T.J. Warren  26 53 1714 17.7 0.600 0.211 0.231  3.2  9.7  6.5
-    ## 3  3   Justin Holiday  30 56 1420 12.4 0.590 0.666 0.141  2.3 12.3  7.3
-    ##   AST% STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM BPM VORP
-    ## 1 20.9  1.0  1.3 14.9 23.4 NA 3.6 2.8 6.4 0.168 NA  1.5  2.3 3.8  2.7
-    ## 2  6.7  1.9  1.3  6.9 22.8 NA 3.0 1.9 4.8 0.135 NA  1.3 -0.7 0.6  1.1
-    ## 3  7.6  2.0  2.3  6.9 13.0 NA 1.7 1.8 3.5 0.117 NA  1.0  1.4 2.4  1.6
+    ##   Rk                  Age  G   MP  PER   TS%  3PAr   FTr ORB% DRB% TRB% AST%
+    ## 1  1      T.J. Warren  26 67 2202 18.4 0.610 0.227 0.205  3.4 10.5  7.0  7.1
+    ## 2  2 Domantas Sabonis  23 62 2159 20.7 0.586 0.079 0.349  9.7 29.3 19.6 21.7
+    ## 3  3   Justin Holiday  30 73 1826 12.1 0.585 0.681 0.138  1.9 12.2  7.1  6.7
+    ##   STL% BLK% TOV% USG%    OWS DWS  WS WS/48    OBPM DBPM BPM VORP
+    ## 1  1.7  1.4  7.2 23.3 NA 4.0 2.6 6.5 0.143 NA  1.2  0.0 1.1  1.7
+    ## 2  1.1  1.2 14.8 23.3 NA 4.1 3.4 7.5 0.168 NA  2.0  1.2 3.2  2.9
+    ## 3  2.3  2.2  7.9 13.4 NA 1.6 2.6 4.2 0.112 NA -0.5  1.8 1.3  1.5
 
-If you are scraping from basketball reference and are running into issues, try to include that 3-line chunk of code to parse comments and see if that helps!
+If you are scraping from basketball reference and are running into issues, it may be a result of parsing issues. If that's the case, try modifying your code to parse comments. If we ran into issues in the previous example, we could adjust our code like so:
 
-Scraping JSON Data
-==================
+``` r
+map(pacer_urls,
+    ~ read_html(.x) %>%
+      # Code to parse the comments
+      html_nodes(xpath='//comment()') %>%
+      html_text() %>%
+      paste(collapse='') %>%
+      # Now go about the usual scraping
+      read_html() %>%
+      html_node('#advanced') %>%
+      html_table())
+```
+
+# Scraping JSON Data
 
 Another great source for NBA data is the NBA's own stats website. Getting data from the NBA site is a little different as it's stored in a JSON format rather than HTML. Don't let this scare you off, though, as getting data is just as easy!
 

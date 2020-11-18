@@ -3,9 +3,7 @@ layout: post
 title: "Scraping Data"
 date: 2017-3-23
 excerpt_separator: <!--more-->
-output:
-  md_document:
-    variant: markdown_github
+output: rmarkdown::github_document
 ---
 
 You're interested in doing some data analysis, that's clear.
@@ -74,7 +72,7 @@ Next, I want to go over an example that's a bit more difficult. The focus on thi
 
 Basketball Reference makes their data easy to download, so if you just want one specific table it may be easier to just go to the website and download a `CSV`. However, we're going to go over an example which scrapes multiple tables.
 
-The tables on Basketball Reference are in HTML format and some are easy to scrape; however, some tables are hidden inside comments, which make them difficult to deal with. We're going to work with a case where we have to get these hidden tables.
+The tables on Basketball Reference are in HTML format and some are easy to scrape; however, some tables are hidden inside comments, which make them difficult to deal with.
 
 In this example we're going to scrape the Indiana Pacers' advanced stats for the past three seasons. An example of one of the tables we're gonna scrape is found [here](http://www.basketball-reference.com/teams/IND/2018.html). We're going to start by creating a list of urls for each of the three seasons. Then, we'll loop through them and paste each respective season into the Indiana Pacers' team url and store it in an object called `pacer_urls`.
 
@@ -86,17 +84,11 @@ pacer_urls <- map(2018:2020,
                            .x, ".html"))
 ```
 
-Now we're going to scrape the tables. We're going to apply a scraping function to each of the urls and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of these seasons. We use the same method explained in the last section of identifying the css selector, in this case it's `#advanced`. Before we scrape the data, we have to parse the comments, but once the comments are parsed, the tables are easily scraped.
+Now we're going to scrape the tables. We're going to apply a scraping function to each of the urls and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of these seasons. We use the same method explained in the last section of identifying the css selector, in this case it's `#advanced`.
 
 ```{r}
 adv_pacers <- map(pacer_urls,
                   ~ read_html(.x) %>%
-                    # Code to parse the comments
-                    html_nodes(xpath='//comment()') %>%
-                    html_text() %>%
-                    paste(collapse='') %>%
-                    # Now go about the usual scraping
-                    read_html() %>%
                     html_node('#advanced') %>%
                     html_table())
 ```
@@ -107,7 +99,21 @@ Looking at the first three rows of each data frame in the list, we can see we we
 map(adv_pacers, ~ head(.x, 3))
 ```
 
-If you are scraping from basketball reference and are running into issues, try to include that 3-line chunk of code to parse comments and see if that helps!
+If you are scraping from basketball reference and are running into issues, it may be a result of parsing issues. If that's the case, try modifying your code to parse comments. If we ran into issues in the previous example, we could adjust our code like so:
+
+```{r, eval = F}
+map(pacer_urls,
+    ~ read_html(.x) %>%
+      # Code to parse the comments
+      html_nodes(xpath='//comment()') %>%
+      html_text() %>%
+      paste(collapse='') %>%
+      # Now go about the usual scraping
+      read_html() %>%
+      html_node('#advanced') %>%
+      html_table())
+```
+
 
 #Scraping JSON Data
 
@@ -115,7 +121,7 @@ Another great source for NBA data is the NBA's own stats website. Getting data f
 
 There are multiple R libraries for scraping JSON data, but the one I'm most familiar with is `rjson`. We also need to use the `httr` package due to some additional discrepincies.
 
-```{r}
+```{r, warning = F}
 library(rjson)
 library(httr)
 ```
@@ -155,7 +161,7 @@ jh_raw <- GET(jh_url, add_headers(.headers = headers))$content %>%
 
 There's a lot of info in this raw list. We could spend a while exploring, but here's how we can get the traditional stats we're looking for:
 
-```{r}
+```{r, message = F}
 jh_df <- map_df(1:length(jh_raw$resultSets[[2]]$rowSet),
                 ~ bind_cols(jh_raw$resultSets[[2]]$rowSet[[.x]]))
 
