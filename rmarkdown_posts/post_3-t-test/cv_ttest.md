@@ -1,13 +1,16 @@
+Comparing Means With the T-Test
+================
+2017-3-31
+
 In this tutorial, we're going to go over using t-tests. The t-test compares the averages of two groups and identifies whether they are different beyond random chance. Although basic, the t-test can be useful in a lot of projects.
 
 <!--more-->
-The Data
-========
+# The Data
 
 The data we'll be using in this tutorial are the individual game scores for the 2010-11 season for Derrick Rose and LeBron James. This was Rose's MVP season, although many viewed James as more deserving of the award. We'll use basketball-reference's game scores to see if there was a significant difference between Rose and James' performance during the season (at least by this metric).
 
 <center>
-<img src="../images/rose.jpg" id="id" class="class" width="350" height="400" />
+<img src="../../images/post3_ttest/rose.jpg" id="id" class="class" width="350" height="400" />
 </center>
 First we're going to bring up the libraries we'll need. We'll need a couple of packages from the tidyverse series of packages, so we'll just load them all up by loading `tidyverse`.
 
@@ -47,8 +50,7 @@ combo <- rose %>%
   bind_rows(james)
 ```
 
-One Sample T-Test
-=================
+# One Sample T-Test
 
 Let's first look at Rose by himself. Let's say that out of of all basketball players, the average game score is `12` (just a complete guess). I want to know whether Rose's mean game score is significantly better than the population mean, and not just a result of random variation.
 
@@ -107,11 +109,10 @@ shapiro.test(rose$GMSC)
 
 The null hypothesis for a Shapiro-Wilk test is that the data is approximately normal. Because the p-value is not below .05 we fail to reject the null. Our t-test is valid!
 
-Two Sample T-Test
-=================
+# Two Sample T-Test
 
 <center>
-<img src="../images/james.jpg" id="id" class="class" width="350" height="400" />
+<img src="../../images/post3_ttest/james.jpg" id="id" class="class" width="350" height="400" />
 </center>
 Now we'll go back to our example mentioned at the beginning: comparing James and Rose's game scores. Let's first look at the distribution of game scores in a box plot.
 
@@ -191,8 +192,7 @@ The 95% confidence interval in the difference between Rose and James' means is -
 
 Although game scores are just one measure, it appears as though LeBron was better in this category than Rose. Maybe there's some truth to the rumor that people were just fed up with LeBron winning all of the awards, so they voted for the next best thing.
 
-What if Assumptions aren't met?
-===============================
+# What if Assumptions aren't met?
 
 There are alternative t-tests that can be used if the variance and normality assumptions aren't met. If the two samples have unequal variances, a Welch t-test can be used. We can simply set the `var.equal` command to false:
 

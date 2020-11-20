@@ -1,6 +1,9 @@
-Scraping Data
-================
-2017-3-23
+---
+layout: post
+title: "Scraping Data"
+date: 2017-3-24 00:00:00
+excerpt_separator: <!--more-->
+---
 
 You're interested in doing some data analysis, that's clear. Unfortunately you're missing something important... Data! There's plenty of sources of NBA data, and luckily for us, most of it's in a very structured format.
 
