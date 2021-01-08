@@ -8,15 +8,13 @@ excerpt_separator: <!--more-->
 It's not news to anyone that the NBA has shifted in style dramatically over the past decade. A game once played in the post has extended to the three point line for an obvious reason... three is greater than two.
 
 <!--more-->
-
 Despite an increase in action and scoring, there seems to be a growing discontent with the over-reliance on three point shooting. I'm not one to long for the days of an uncoordinted seven footer backing down in the post for twenty seconds before clanging a hook shot off the rim. However, variety is the spice of life, and people will get tired and tune out from a game focused solely on one type of shot.
 
 There have been a lot of interesting ideas brought up to tackle this issue, but the one we'll focus on is changing shot value. There wasn't anything special about the distance the league chose to mark the three point line, but it's impacted what we call a good and bad shot. Why should a three pointer be worth `33%` more than a mid range jump shot from a similar distance.
 
 In this post, we'll look at making a mid-range shot more appealing, by revaluing it from `2` points to `2.5`.
 
-The Data
-========
+# The Data
 
 For this project, we need shot location data. The [NBA's stats website](https://stats.nba.com/players/shooting/?Season=2019-20&SeasonType=Regular%20Season&DistanceRange=By%20Zone) has shot data from different generalized areas of the court. They include:
 
@@ -30,8 +28,7 @@ For this project, we need shot location data. The [NBA's stats website](https://
 
 It'd be great if we could a bit more granular, but the NBA hasn't allowed a lot of freedom in terms of tracking stats. With these stats available, however, we can calculate where players prefer to shoot and where they shoot well. For this project, I stuck with data from this past season only (2019-20).
 
-The Value of a Shot
-===================
+# The Value of a Shot
 
 With data on where each shot was taken from, we can find a general point value of a shot taken in that location. We can do so by multiplying the expected point value of the shot with the field goal percentage of a shot in that location.
 
@@ -51,13 +48,9 @@ Let's see how this plot would change if we revalued mid-range shots to be worth 
 
 Now, you might be wondering why I'm getting so hung up on mid-range shots and not the lowest valued shots: in the paint. My reasoning is based on the fact that there are a lot of other ways to improve the value of shots in the paint before actually changing the point value (removing the three second rule, calling more fouls, etc.). Mid-range shots don't really have these other options.
 
-By Team
-=======
+# By Team
 
 The following table shows the percentage of points each team scores from each area.
-
-    ## This version of Shiny is designed to work with 'htmlwidgets' >= 1.5.
-    ##     Please upgrade via install.packages('htmlwidgets').
 
 ![](cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
@@ -65,8 +58,7 @@ Focusing on mid-range shots, we can see that the Spurs are far and away the team
 
 It's also interesting to see the teams that have the lowest percentage of points from the mid-range area. One might expect to see these teams be the more successful ones in the league (they're shunning a low value shot, after all); however, it's more of a mix of the good and the meh. Expected standouts like Houston and Toronto are there, but so are the Hornets (would not have guessed that).
 
-By Player
-=========
+# By Player
 
 After looking at changes by team, let's look at how this change would effect the average points scored by different players. We'll look at some subsets of players here, but the changes in PPG for every player can be found [here](https://github.com/jcampbellsjci/jcampbellsjci.github.io/blob/master/data/post21_shot-range/player_new_values.csv).
 
@@ -89,8 +81,7 @@ If these players aren't depending on mid-range shots, let's see where they are s
 </center>
 We can see that there are two types of players in this subset: three point shooters and paint players. Mitchell Robinson is an example of the latter with almost all of his shots coming from the restricted area. Ben McLemore is the former, which seems to be the common mold of a Houston rotation player: three or die.
 
-Impact of Shot Value Change
-===========================
+# Impact of Shot Value Change
 
 If the value of a mid-range shot jumped from `2` to `2.5` I would expect to see some more variety in shot location across the league. However, it wouldn't necessarily be the game changer some might expect.
 
