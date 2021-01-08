@@ -5,11 +5,11 @@ Scraping Data
 You're interested in doing some data analysis, that's clear. Unfortunately you're missing something important... Data! There's plenty of sources of NBA data, and luckily for us, most of it's in a very structured format.
 
 <!--more-->
-In this post, I'm going to show you how to get data from a couple of different sources. The focus is going to be on scraping your own data from websites. You may be used to copying and pasting data into a spreadsheet or downloading it in `CSV` form. While this method is straightforward, when trying to collect large amounts of data this method can be very cumbersome.
+In this post, I'm going to show you how to get data from a couple of different sources. The focus is going to be on scraping your own data from websites. You may be used to copying and pasting data into a spreadsheet or downloading it in `CSV` form. While this method is straightforward, when trying to collect large amounts of data it can be very cumbersome.
 
 # Scraping a Basic HTML Table
 
-The first example we're going to go over is scraping standings from `Basketball-Reference`. The standings are in a basic HTML format. We'll be using the `dplyr` and `rvest` packages throughout this post, so let's load them up now.
+The first example we're going to go over is scraping standings from Basketball-Reference. The standings are in a basic HTML format. We'll be using the `dplyr` and `rvest` packages throughout this post, so let's load them up now.
 
 ``` r
 library(rvest)
@@ -24,7 +24,7 @@ Now we'll store the url we are going to be scraping from in an object called `br
 bref <- "https://www.basketball-reference.com/leagues/NBA_2020.html"
 ```
 
-Now it's time to scrape some data. What you'll need is the CSS selector. The method for getting this can be different based on what browser you use. I use firefox, and I simply right click on the table and click on `inspect element`. I then look for the line of code in the inspector that covers the table (the table will be highlighted once you hover over the code). I then copy the selector. In this example it's `#confs_standings`.
+Now it's time to scrape some data. What you'll need is the CSS selector. The method for getting this can be different based on what browser you use. I use firefox, and I simply right click on the table and click on `inspect element`. From there, we can look for the line of code in the inspector that covers the table (the table will be highlighted once you hover over the code). Then, copy the selector; in this example it's `#confs_standings`.
 
 Using `rvest`, we scrape the data and store it in `bref_standings`. We paste the css selector in the `read_html()` function. Because the data we are scraping is in table format, we use the command `html_table()`, which parses the table into a data frame.
 
@@ -68,7 +68,7 @@ Now we have a beautiful tibble to play around with!
 
 # HTML Scraping Continued
 
-Next, I want to go over an example that's a bit more difficult. The focus on this section is more about dealing with basktball reference rather than the scraping itself, but it's a website you'll probably use a lot if you want to analyze NBA stats, so I think it's important to go over.
+Next, I want to go over an example that's a bit more involved. The focus on this section is more about dealing with basktball reference rather than the scraping itself, but it's a website you'll probably use a lot if you want to analyze NBA stats, so I think it's important to go over.
 
 Basketball Reference makes their data easy to download, so if you just want one specific table it may be easier to just go to the website and download a `CSV`. However, we're going to go over an example which scrapes multiple tables.
 
@@ -84,7 +84,7 @@ pacer_urls <- map(2018:2020,
                            .x, ".html"))
 ```
 
-Now we're going to scrape the tables. We're going to apply a scraping function to each of the urls and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of these seasons. We use the same method explained in the last section of identifying the css selector, in this case it's `#advanced`.
+We're going to apply the same `rvest` methodology to scrape the advanced stats tables on each of the urls (the CSS selector in this case is `'advanced'`) and store the output in a list called `adv_pacers`. This will hold the advanced stats from each of the seasons we specified.
 
 ``` r
 adv_pacers <- map(pacer_urls,
@@ -135,9 +135,9 @@ If you are scraping from basketball reference and are running into issues, it ma
 map(pacer_urls,
     ~ read_html(.x) %>%
       # Code to parse the comments
-      html_nodes(xpath='//comment()') %>%
+      html_nodes(xpath = '//comment()') %>%
       html_text() %>%
-      paste(collapse='') %>%
+      paste(collapse = '') %>%
       # Now go about the usual scraping
       read_html() %>%
       html_node('#advanced') %>%
