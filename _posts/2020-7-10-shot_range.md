@@ -35,14 +35,14 @@ With data on where each shot was taken from, we can find a general point value o
 The following plot shows the respective point values of a shot from each location (note that `free_throw` is the estimated value of a two-shot trip to the line):
 
 <center>
-<img src="../../images/post21_shot-range/shot_value_initial.png" id="id" class="class" width="500" height="500" />
+<img src="../images/post21_shot-range/shot_value_initial.png" id="id" class="class" width="500" height="500" />
 </center>
 We can see that there is a pretty steep drop off from `above_the_break_3` and the next level, `mid_range`. There isn't a ton of benefit for a team to shoot a mid-range shot. It's difficulty isn't being properly valued in comparison to other locations.
 
 Let's see how this plot would change if we revalued mid-range shots to be worth `2.5` points:
 
 <center>
-<img src="../../images/post21_shot-range/shot_value_adjusted.png" id="id" class="class" width="500" height="500" />
+<img src="../images/post21_shot-range/shot_value_adjusted.png" id="id" class="class" width="500" height="500" />
 </center>
 `mid_range` hasn't jumped above any other shot locations in expected point value, but it has become more aligned with them.
 
@@ -52,7 +52,7 @@ Now, you might be wondering why I'm getting so hung up on mid-range shots and no
 
 The following table shows the percentage of points each team scores from each area.
 
-![](cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](../images/post21_shot-range/cv_2020-7-10-shot_range_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
 Focusing on mid-range shots, we can see that the Spurs are far and away the team that depends on them the most. This may seem like a surprise since the Spurs have this aura of being a modern team in terms of style. However, considering their star players are DeMar DeRozan and LaMarcus Aldridge, the results make a bit more sense.
 
@@ -65,19 +65,19 @@ After looking at changes by team, let's look at how this change would effect the
 The following plot shows the players with the largest percent increase in PPG from this value change:
 
 <center>
-<img src="../../images/post21_shot-range/top_mid_range.png" id="id" class="class" width="500" height="500" />
+<img src="../images/post21_shot-range/top_mid_range.png" id="id" class="class" width="500" height="500" />
 </center>
 Here we can see the players that would benefit the most are who we'd expect. Aldridge would benefit the most by far with a scoring increase of over `7%`. Interestingly, two other Spurs players top the list with Dejounte Murray and DeRozan. There might be an over-reliance on the mid-range specialist in San Antonio.
 
 Let's look at the players least impacted by the value change:
 
 <center>
-<img src="../../images/post21_shot-range/bottom_mid_range.png" id="id" class="class" width="500" height="500" />
+<img src="../images/post21_shot-range/bottom_mid_range.png" id="id" class="class" width="500" height="500" />
 </center>
 If these players aren't depending on mid-range shots, let's see where they are shooting from. The following plot shows what locations these players are getting their shot attempts from (excluding free throws).
 
 <center>
-<img src="../../images/post21_shot-range/bottom_explained.png" id="id" class="class" width="500" height="500" />
+<img src="../images/post21_shot-range/bottom_explained.png" id="id" class="class" width="500" height="500" />
 </center>
 We can see that there are two types of players in this subset: three point shooters and paint players. Mitchell Robinson is an example of the latter with almost all of his shots coming from the restricted area. Ben McLemore is the former, which seems to be the common mold of a Houston rotation player: three or die.
 
