@@ -119,7 +119,7 @@ think of these two shapes in a more general sense as the number of
 successes and failures of an experiment. The following plots a few
 different beta distributions.
 
-<br><center><img src="../../images/beta distribution.PNG"></center>
+<br><center><img src="../../images/post18_bayes2/beta distribution.PNG"></center>
 
 Notice how a <a href="https://www.codecogs.com/eqnedit.php?latex=beta(1,&space;1)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?beta(1,&space;1)" title="beta(1, 1)" /></a> distribution is just a flat line; this
 is known as a uniform prior because it has the same density for all
@@ -240,9 +240,9 @@ Let's plot the prior, the likelihood, and the posterior to see how our
 prior hypothesis changed due to how Curry was playing in the Christmas
 day game:
 
-<br><center><img src="../../images/prior.PNG"></center>
-<br><center><img src="../../images/lik.PNG"></center>
-<br><center><img src="../../images/posterior.PNG"></center>
+<br><center><img src="../../images/post18_bayes2/prior.PNG"></center>
+<br><center><img src="../../images/post18_bayes2/lik.PNG"></center>
+<br><center><img src="../../images/post18_bayes2/posterior.PNG"></center>
 
 We can see visually that the range of possible probabilities for Curry
 to make a shot has gone down. Let's see what the max probability value
