@@ -6,7 +6,7 @@ excerpt_separator: <!--more-->
 output: github_document
 ---
 
-Up until now, most of the statistical work we have looked at would fall under the category of frequentist statistics: we've made inferential conclusions about populations based on a sample of data.
+Up until now, most of the statistical work we have looked at would fall under the category of frequentist statistics: we've made inferential conclusions about populations based solely on data.
 
 But we don't necessarily need to rely on just a sample of data to make a conclusion; we can include our prior knowledge and beliefs on the subject using what is called Bayesian statistics. The next couple of posts will focus on Bayesian methodology, allowing us to see how we can include our own prior beliefs in models we create. 
 
@@ -18,15 +18,15 @@ Most people deal with probability in their day-to-day lives, whether you're a st
 
 We don't always think of the probability of one event, though... we sometimes combine events together. For example, what is the probability of the Warriors winning the championship this year AND next year (again, probably close to 100%). Here we start to get into joint and conditional probability.
 
-Conditional probability, <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>, is the probability that event *X* will happen, given event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> has happened. For example, if the Warriors win the championship, what is the probability that they sign another superstar?
+Conditional probability, represented as <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>, is the probability that event *X* will happen, given event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> happens. For example, if the Warriors win the championship, what is the probability that they sign another superstar?
 
-Joint probability, <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,Y)" title="P(X,Y)" /></a>, is the probability that event *X* and event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> happen. So this would be the probability that the Warriors win a championship and sign a superstar.
+Joint probability, represented as <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,Y)" title="P(X,Y)" /></a>, is the probability that event *X* and event <a href="https://www.codecogs.com/eqnedit.php?latex=Y" target="_blank"><img src="https://latex.codecogs.com/gif.latex?Y" title="Y" /></a> happen. So this would be the probability that the Warriors win a championship and sign a superstar.
 
-The joint probability of two independent events (say someone scoring 20 points in one game and another player scoring 15 points in a separate game) is found by multiplying those two probabilities:
+The joint probability of two independent events (say someone scoring 20 points in one game and another player scoring 15 points in a separate game) is found by multiplying those events' probabilities:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y)" title="P(X, Y)=P(X)*P(Y)" /></a>.
 
-If one of the events is dependent on the other, we multiple the probability of the first event and the conditional probability of event two given event one has happened:
+If one of the events is dependent on the other, we multiple the probability of the first event and the conditional probability of the second given event one has happened:
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)* P(Y|X)" title="P(X, Y)=P(X)*P(Y|X)" /></a>.
 
@@ -38,7 +38,11 @@ We can restructure this to find the formula for the conditional probability:
 
 Bayesian statistics has become extremely popular as computer power has improved, but its origins actually go way back to the 18th century and Reverend Thomas Bayes.
 
-Bayes rule is another form of the conditional probability formula. Remember that the joint probability of two dependent events is <a href="https://www.codecogs.com/eqnedit.php?latex=P(X,&space;Y)=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X,&space;Y)=P(X)*P(Y|X)" title="P(X, Y)=P(X)*P(Y|X)" /></a>. Therefore, we could replace the numerator in the conditional probability formula with <a href="https://www.codecogs.com/eqnedit.php?latex=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)*P(Y|X)" title="P(X)*P(Y|X)" /></a>:
+Bayes rule is another form of the conditional probability formula. Remember that the conditional probability of an event can be found with:
+
+![](https://latex.codecogs.com/gif.latex?P%28Y%7CX%29%3D%5Cfrac%7BP%28X%2CY%29%7D%7BP%28X%29%7D)
+
+We could replace the numerator in the conditional probability formula with <a href="https://www.codecogs.com/eqnedit.php?latex=P(X)*P(Y|X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)*P(Y|X)" title="P(X)*P(Y|X)" /></a> to get:
 
 ![](https://latex.codecogs.com/gif.latex?P%28X%20%7C%20Y%29%3D%5Cfrac%7BP%28Y%7CX%29P%28X%29%7D%7BP%28Y%29%7D)
 
@@ -59,7 +63,7 @@ equation:
 -   <a href="https://www.codecogs.com/eqnedit.php?latex=P(X|Y)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X|Y)" title="P(X|Y)" /></a>: Probability a player is drafted given that they are at
     least 7 ft.
 
-The numbers I use for this example are not based on any data; we'll make them up along the way just to further the example.
+Note that the numbers I use for this are not based on any data; we'll make them up along the way just to further the example.
 
 Let's address <a href="https://www.codecogs.com/eqnedit.php?latex=P(X)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(X)" title="P(X)" /></a> first; even if you are a college player, the
 chances of being drafted are extremely low. There are only 60 spots each
