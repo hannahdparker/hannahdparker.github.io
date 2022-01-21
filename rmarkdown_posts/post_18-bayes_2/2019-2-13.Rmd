@@ -7,7 +7,7 @@ output: github_document
 ---
 
 In the last post, we saw a basic overview of Bayes rule, but we didn't
-see it at its full power. Rather than limiting ourselves to single value priors, we can use a full distribution as a prior. In this post, we'll see a Bayesian example with an expanded our prior and compare it to the more traditional frequentist methodology.
+experience it at its full power. Rather than limiting ourselves to single value priors, we can use a full distribution as a prior. In this post, we'll see a Bayesian example with an expanded prior and compare it to the more traditional frequentist methodology.
 
 <!--more-->
 
@@ -30,8 +30,8 @@ In the last post, we went over Bayes rule:
 ![](https://latex.codecogs.com/gif.latex?P%28X%7CY%29%20%3D%20%5Cfrac%7BP%28Y%7CX%29P%28X%29%7D%7BP%28Y%29%7D)
 
 Let's play around with what $X$
-and $Y$ represent; $X$ with ![](https://latex.codecogs.com/gif.latex?%5Ctheta), our prior beliefs, and
-$Y$ with <a href="https://www.codecogs.com/eqnedit.php?latex=data" target="_blank"><img src="https://latex.codecogs.com/gif.latex?data" title="data" /></a>. This makes our equation:
+and $Y$ represent; $X$ will change to ![](https://latex.codecogs.com/gif.latex?%5Ctheta), our prior beliefs, and
+$Y$ will change to <a href="https://www.codecogs.com/eqnedit.php?latex=data" target="_blank"><img src="https://latex.codecogs.com/gif.latex?data" title="data" /></a>. This makes our equation:
 
 ![](https://latex.codecogs.com/gif.latex?P%28%5Ctheta%20%7Cdata%29%20%3D%20%5Cfrac%7BP%28data%7C%5Ctheta%20%29P%28%5Ctheta%20%29%7D%7BP%28data%29%7D)
 
@@ -41,13 +41,13 @@ with the Bayesian lingo.
 
 * Prior: ![](https://latex.codecogs.com/gif.latex?P%28%5Ctheta%29). This is our belief, or hypothesis, going into the model. Our prior can have a large or small impact on the model depending on whether we have strong or weak prior beliefs. For example, I may have a very strong prior belief that Steph Curry is going to hit a three pointer.
 
-* Likelihood: ![](https://latex.codecogs.com/gif.latex?P%28data%20%7C%20%5Ctheta%29). This is the probability of seeing our data given our prior beliefs. If we had a strong belief that Steph Curry hits a three, this is the probability of seeing the data we have.
+* Likelihood: ![](https://latex.codecogs.com/gif.latex?P%28data%20%7C%20%5Ctheta%29). This is the probability of seeing our data given our prior beliefs. If we had a strong belief that Steph Curry hits a three, this is the probability of seeing the sample data we have collected.
 
 * Posterior: ![](https://latex.codecogs.com/gif.latex?P%28%20%5Ctheta%20%7C%20data%29). This is the probability of our hypothesis given the data.
 
 Notice that <a href="https://www.codecogs.com/eqnedit.php?latex=P(data)" target="_blank"><img src="https://latex.codecogs.com/gif.latex?P(data)" title="P(data)" /></a>, also known as our evidence, is not
 impacted at all by our hypothesis. It is acting strictly as a
-normalizing constant. Because of this, we could say:
+normalizing constant. Because of this, we could represent the equation as:
 
 ![](https://latex.codecogs.com/gif.latex?P%28%5Ctheta%20%7Cdata%29%20%5Cpropto%20P%28data%7C%5Ctheta%20%29P%28%5Ctheta%20%29)
 
@@ -72,10 +72,10 @@ probability of Curry hitting his next shot given that he is currently
 shooting 5 of 17? Let's break this down by each part of the Bayesian
 formula:
 
-* Posterior: P(Curry hits a shot|Curry shoots 5 of 17)
+* Posterior: P(Curry hits a shot given Curry has shot 5 of 17)
 * Prior: P(Curry hits a shot)
 * Evidence: P(Curry shoots 5 of 17)
-* Likelihood: P(Curry shoots 5 of 17|prior belief that Curry hits a shot)
+* Likelihood: P(Curry shoots 5 of 17 given our prior belief that Curry hits a shot)
 
 In terms of our prior, we may have one set value we want to assign to
 Curry hitting his next shot, but why stop at a single value when we can use a whole distribution?
@@ -174,8 +174,7 @@ Now, let's think about our likelihood. This likelihood distribution
 allows us to identify the most likely hypothesis given a set of data.
 Like with our prior, we can represent this in our equation with a
 distribution. Instead of using past games to model the distribution like
-we did with our prior, we'll instead use the data we are currently
-seeing: the Christmas day game.
+we did with our prior, we'll instead use our sample data from the Christmas day game.
 
 So, assuming that Curry's Christmas day game represents the probability of him making a shot generally, we want to know the probability of different amounts of shots being made...
 that sounds like the ideal set-up for a binomial distribution! The
@@ -210,7 +209,7 @@ hypothesis, ![](https://latex.codecogs.com/gif.latex?%5Ctheta).
 Now, let's think of these distributions mathematically:
 
 * The PMF for a binomial distribution is: ![](https://latex.codecogs.com/gif.latex?%5Cbinom%7Bn%7D%7Bk%7Dp%5Ek%281-p%29%5E%7B%28n-k%29%7D) where <a href="https://www.codecogs.com/eqnedit.php?latex=n" target="_blank"><img src="https://latex.codecogs.com/gif.latex?n" title="n" /></a> is the number of trials, <a href="https://www.codecogs.com/eqnedit.php?latex=k" target="_blank"><img src="https://latex.codecogs.com/gif.latex?k" title="k" /></a> is the number of successes, and <a href="https://www.codecogs.com/eqnedit.php?latex=p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p" title="p" /></a> is the success probability for each trial.
-* The PDF for a beta distribution is: ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5CGamma%28%5Calpha&plus;%5Cbeta%29%7D%7B%5CGamma%28%5Calpha%29%5CGamma%28%5Cbeta%29%7Dp%5E%7B%5Calpha-1%7D%281-p%29%5E%7B%5Cbeta-1%7D) where ![](https://latex.codecogs.com/gif.latex?%5Calpha) and ![https://latex.codecogs.com/gif.latex?%5Cbeta] are the two shape parameters representing successes and failures and <a href="https://www.codecogs.com/eqnedit.php?latex=p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p" title="p" /></a> are the different probability values.
+* The PDF for a beta distribution is: ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5CGamma%28%5Calpha&plus;%5Cbeta%29%7D%7B%5CGamma%28%5Calpha%29%5CGamma%28%5Cbeta%29%7Dp%5E%7B%5Calpha-1%7D%281-p%29%5E%7B%5Cbeta-1%7D) where ![](https://latex.codecogs.com/gif.latex?%5Calpha) and ![](https://latex.codecogs.com/gif.latex?%5Cbeta) are the two shape parameters representing successes and failures and <a href="https://www.codecogs.com/eqnedit.php?latex=p" target="_blank"><img src="https://latex.codecogs.com/gif.latex?p" title="p" /></a> is the different probability values.
 
 We can multiply these two distributions together to get the posterior
 distribution; to make our lives easier, we can again remove constants
@@ -230,9 +229,7 @@ making our full posterior beta distribution look like:
 
 ![](https://latex.codecogs.com/gif.latex?%5Cfrac%7B%5CGamma%28n&plus;%5Calpha&plus;%5Cbeta%29%7D%7B%5CGamma%28%5Calpha&plus;k%29%5CGamma%28%5Cbeta&plus;n-k%29%7Dp%5E%7B%5Calpha&plus;k-1%7D%281-p%29%5E%7B%5Cbeta&plus;n-k-1%7D).
 
-In the end, all we need to do is just add the additional successes and
-failures we saw in the Christmas day game to the shape parameters of the
-beta distribution:
+The actual math required here is a lot more simple than it actually sounds: all we need to do is just add the additional successes andfailures we saw in the Christmas day game to the shape parameters of the beta distribution:
 
 `dbeta(x, 5 + beta.param$estimate[1], 12 + beta.param$estimate[2])`.
 
@@ -280,8 +277,7 @@ only judging Steph on his Christmas day game, we'd tell him to pass it
 if they want to stand any chance against the Lakers. But, when we take
 our prior knowledge of his ability into account, his odds improve
 (although they still aren't great). Bayesian inference really lets us
-perform analysis in a more relatable manner; we are constantly taking
-past knowledge and beliefs into account when we make decisions.
+perform analysis in a manner more relatable to how we actually think; we are constantly taking past knowledge and beliefs into account when we make decisions.
 
 A great article if you want to see another example of Bayesian inference
 in the sports field can be found and David Robinson's Variance Explained
