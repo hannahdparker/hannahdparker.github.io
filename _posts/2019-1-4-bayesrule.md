@@ -1,6 +1,9 @@
-Bayesian Inference Pt. 1: Bayes Rule
-================
-2019-01-04 00:00:00
+---
+layout: post
+title: "Bayesian Inference Pt. 1: Bayes Rule"
+date: 2019-01-04 00:00:00
+excerpt_separator: <!--more-->
+---
 
 Up until now, most of the statistical work we have looked at would fall
 under the category of frequentist statistics: we’ve made inferential
